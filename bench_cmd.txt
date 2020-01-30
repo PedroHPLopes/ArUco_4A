@@ -1,0 +1,4 @@
+watch -n1 vcgencmd measure_clock arm
+
+watch -n1 vcgencmd measure_temp
+

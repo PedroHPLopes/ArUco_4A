@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module cv2.aruco</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="cv2.html"><font color="#ffffff">cv2</font></a>.aruco</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br>(built-in)</font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-Board_create"><strong>Board_create</strong></a>(...)</dt><dd><tt><a href="#-Board_create">Board_create</a>(objPoints,&nbsp;dictionary,&nbsp;ids)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Provide&nbsp;way&nbsp;to&nbsp;create&nbsp;Board&nbsp;by&nbsp;passing&nbsp;necessary&nbsp;data.&nbsp;Specially&nbsp;needed&nbsp;in&nbsp;Python.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;objPoints&nbsp;array&nbsp;of&nbsp;object&nbsp;points&nbsp;of&nbsp;all&nbsp;the&nbsp;marker&nbsp;corners&nbsp;in&nbsp;the&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;dictionary&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;markers&nbsp;employed&nbsp;for&nbsp;this&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ids&nbsp;vector&nbsp;of&nbsp;the&nbsp;identifiers&nbsp;of&nbsp;the&nbsp;markers&nbsp;in&nbsp;the&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</tt></dd></dl>
+ <dl><dt><a name="-CharucoBoard_create"><strong>CharucoBoard_create</strong></a>(...)</dt><dd><tt><a href="#-CharucoBoard_create">CharucoBoard_create</a>(squaresX,&nbsp;squaresY,&nbsp;squareLength,&nbsp;markerLength,&nbsp;dictionary)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Create&nbsp;a&nbsp;CharucoBoard&nbsp;object<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;squaresX&nbsp;number&nbsp;of&nbsp;chessboard&nbsp;squares&nbsp;in&nbsp;X&nbsp;direction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;squaresY&nbsp;number&nbsp;of&nbsp;chessboard&nbsp;squares&nbsp;in&nbsp;Y&nbsp;direction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;squareLength&nbsp;chessboard&nbsp;square&nbsp;side&nbsp;length&nbsp;(normally&nbsp;in&nbsp;meters)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerLength&nbsp;marker&nbsp;side&nbsp;length&nbsp;(same&nbsp;unit&nbsp;than&nbsp;squareLength)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;dictionary&nbsp;dictionary&nbsp;of&nbsp;markers&nbsp;indicating&nbsp;the&nbsp;type&nbsp;of&nbsp;markers.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;first&nbsp;markers&nbsp;in&nbsp;the&nbsp;dictionary&nbsp;are&nbsp;used&nbsp;to&nbsp;fill&nbsp;the&nbsp;white&nbsp;chessboard&nbsp;squares.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;output&nbsp;CharucoBoard&nbsp;object<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;functions&nbsp;creates&nbsp;a&nbsp;CharucoBoard&nbsp;object&nbsp;given&nbsp;the&nbsp;number&nbsp;of&nbsp;squares&nbsp;in&nbsp;each&nbsp;direction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;markers&nbsp;and&nbsp;chessboard&nbsp;squares.</tt></dd></dl>
+ <dl><dt><a name="-DetectorParameters_create"><strong>DetectorParameters_create</strong></a>(...)</dt><dd><tt><a href="#-DetectorParameters_create">DetectorParameters_create</a>()&nbsp;-&gt;&nbsp;retval<br>
+.</tt></dd></dl>
+ <dl><dt><a name="-Dictionary_create"><strong>Dictionary_create</strong></a>(...)</dt><dd><tt><a href="#-Dictionary_create">Dictionary_create</a>(nMarkers,&nbsp;markerSize[,&nbsp;randomSeed])&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@see&nbsp;generateCustomDictionary</tt></dd></dl>
+ <dl><dt><a name="-Dictionary_create_from"><strong>Dictionary_create_from</strong></a>(...)</dt><dd><tt><a href="#-Dictionary_create_from">Dictionary_create_from</a>(nMarkers,&nbsp;markerSize,&nbsp;baseDictionary[,&nbsp;randomSeed])&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@see&nbsp;generateCustomDictionary</tt></dd></dl>
+ <dl><dt><a name="-Dictionary_get"><strong>Dictionary_get</strong></a>(...)</dt><dd><tt><a href="#-Dictionary_get">Dictionary_get</a>(dict)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@see&nbsp;getPredefinedDictionary</tt></dd></dl>
+ <dl><dt><a name="-Dictionary_getBitsFromByteList"><strong>Dictionary_getBitsFromByteList</strong></a>(...)</dt><dd><tt><a href="#-Dictionary_getBitsFromByteList">Dictionary_getBitsFromByteList</a>(byteList,&nbsp;markerSize)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Transform&nbsp;list&nbsp;of&nbsp;bytes&nbsp;to&nbsp;matrix&nbsp;of&nbsp;bits</tt></dd></dl>
+ <dl><dt><a name="-Dictionary_getByteListFromBits"><strong>Dictionary_getByteListFromBits</strong></a>(...)</dt><dd><tt><a href="#-Dictionary_getByteListFromBits">Dictionary_getByteListFromBits</a>(bits)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Transform&nbsp;matrix&nbsp;of&nbsp;bits&nbsp;to&nbsp;list&nbsp;of&nbsp;bytes&nbsp;in&nbsp;the&nbsp;4&nbsp;rotations</tt></dd></dl>
+ <dl><dt><a name="-GridBoard_create"><strong>GridBoard_create</strong></a>(...)</dt><dd><tt><a href="#-GridBoard_create">GridBoard_create</a>(markersX,&nbsp;markersY,&nbsp;markerLength,&nbsp;markerSeparation,&nbsp;dictionary[,&nbsp;firstMarker])&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Create&nbsp;a&nbsp;GridBoard&nbsp;object<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markersX&nbsp;number&nbsp;of&nbsp;markers&nbsp;in&nbsp;X&nbsp;direction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markersY&nbsp;number&nbsp;of&nbsp;markers&nbsp;in&nbsp;Y&nbsp;direction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerLength&nbsp;marker&nbsp;side&nbsp;length&nbsp;(normally&nbsp;in&nbsp;meters)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerSeparation&nbsp;separation&nbsp;between&nbsp;two&nbsp;markers&nbsp;(same&nbsp;unit&nbsp;as&nbsp;markerLength)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;dictionary&nbsp;dictionary&nbsp;of&nbsp;markers&nbsp;indicating&nbsp;the&nbsp;type&nbsp;of&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;firstMarker&nbsp;id&nbsp;of&nbsp;first&nbsp;marker&nbsp;in&nbsp;dictionary&nbsp;to&nbsp;use&nbsp;on&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;output&nbsp;GridBoard&nbsp;object<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;functions&nbsp;creates&nbsp;a&nbsp;GridBoard&nbsp;object&nbsp;given&nbsp;the&nbsp;number&nbsp;of&nbsp;markers&nbsp;in&nbsp;each&nbsp;direction&nbsp;and<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;marker&nbsp;size&nbsp;and&nbsp;marker&nbsp;separation.</tt></dd></dl>
+ <dl><dt><a name="-calibrateCameraAruco"><strong>calibrateCameraAruco</strong></a>(...)</dt><dd><tt><a href="#-calibrateCameraAruco">calibrateCameraAruco</a>(corners,&nbsp;ids,&nbsp;counter,&nbsp;board,&nbsp;imageSize,&nbsp;cameraMatrix,&nbsp;distCoeffs[,&nbsp;rvecs[,&nbsp;tvecs[,&nbsp;flags[,&nbsp;criteria]]]])&nbsp;-&gt;&nbsp;retval,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvecs,&nbsp;tvecs<br>
+.&nbsp;&nbsp;&nbsp;@brief&nbsp;It's&nbsp;the&nbsp;same&nbsp;function&nbsp;as&nbsp;#calibrateCameraAruco&nbsp;but&nbsp;without&nbsp;calibration&nbsp;error&nbsp;estimation.</tt></dd></dl>
+ <dl><dt><a name="-calibrateCameraArucoExtended"><strong>calibrateCameraArucoExtended</strong></a>(...)</dt><dd><tt><a href="#-calibrateCameraArucoExtended">calibrateCameraArucoExtended</a>(corners,&nbsp;ids,&nbsp;counter,&nbsp;board,&nbsp;imageSize,&nbsp;cameraMatrix,&nbsp;distCoeffs[,&nbsp;rvecs[,&nbsp;tvecs[,&nbsp;stdDeviationsIntrinsics[,&nbsp;stdDeviationsExtrinsics[,&nbsp;perViewErrors[,&nbsp;flags[,&nbsp;criteria]]]]]]])&nbsp;-&gt;&nbsp;retval,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvecs,&nbsp;tvecs,&nbsp;stdDeviationsIntrinsics,&nbsp;stdDeviationsExtrinsics,&nbsp;perViewErrors<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Calibrate&nbsp;a&nbsp;camera&nbsp;using&nbsp;aruco&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;corners&nbsp;vector&nbsp;of&nbsp;detected&nbsp;marker&nbsp;corners&nbsp;in&nbsp;all&nbsp;frames.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;corners&nbsp;should&nbsp;have&nbsp;the&nbsp;same&nbsp;format&nbsp;returned&nbsp;by&nbsp;detectMarkers&nbsp;(see&nbsp;#detectMarkers).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ids&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;marker&nbsp;in&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;counter&nbsp;number&nbsp;of&nbsp;markers&nbsp;in&nbsp;each&nbsp;frame&nbsp;so&nbsp;that&nbsp;corners&nbsp;and&nbsp;ids&nbsp;can&nbsp;be&nbsp;split<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;Marker&nbsp;Board&nbsp;layout<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;imageSize&nbsp;Size&nbsp;of&nbsp;the&nbsp;image&nbsp;used&nbsp;only&nbsp;to&nbsp;initialize&nbsp;the&nbsp;intrinsic&nbsp;camera&nbsp;matrix.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;Output&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$&nbsp;.&nbsp;If&nbsp;CV\_CALIB\_USE\_INTRINSIC\_GUESS<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and/or&nbsp;CV_CALIB_FIX_ASPECT_RATIO&nbsp;are&nbsp;specified,&nbsp;some&nbsp;or&nbsp;all&nbsp;of&nbsp;fx,&nbsp;fy,&nbsp;cx,&nbsp;cy&nbsp;must&nbsp;be<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;initialized&nbsp;before&nbsp;calling&nbsp;the&nbsp;function.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvecs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;rotation&nbsp;vectors&nbsp;(see&nbsp;Rodrigues&nbsp;)&nbsp;estimated&nbsp;for&nbsp;each&nbsp;board&nbsp;view<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(e.g.&nbsp;std::vector&lt;cv::Mat&gt;&gt;).&nbsp;That&nbsp;is,&nbsp;each&nbsp;k-th&nbsp;rotation&nbsp;vector&nbsp;together&nbsp;with&nbsp;the&nbsp;corresponding<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;k-th&nbsp;translation&nbsp;vector&nbsp;(see&nbsp;the&nbsp;next&nbsp;output&nbsp;parameter&nbsp;description)&nbsp;brings&nbsp;the&nbsp;board&nbsp;pattern<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;from&nbsp;the&nbsp;model&nbsp;coordinate&nbsp;space&nbsp;(in&nbsp;which&nbsp;object&nbsp;points&nbsp;are&nbsp;specified)&nbsp;to&nbsp;the&nbsp;world&nbsp;coordinate<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;space,&nbsp;that&nbsp;is,&nbsp;a&nbsp;real&nbsp;position&nbsp;of&nbsp;the&nbsp;board&nbsp;pattern&nbsp;in&nbsp;the&nbsp;k-th&nbsp;pattern&nbsp;view&nbsp;(k=0..&nbsp;*M*&nbsp;-1).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvecs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;translation&nbsp;vectors&nbsp;estimated&nbsp;for&nbsp;each&nbsp;pattern&nbsp;view.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;stdDeviationsIntrinsics&nbsp;Output&nbsp;vector&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;estimated&nbsp;for&nbsp;intrinsic&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Order&nbsp;of&nbsp;deviations&nbsp;values:<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(f_x,&nbsp;f_y,&nbsp;c_x,&nbsp;c_y,&nbsp;k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2,&nbsp;k_3,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6&nbsp;,&nbsp;s_1,&nbsp;s_2,&nbsp;s_3,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;s_4,&nbsp;\tau_x,&nbsp;\tau_y)\f$&nbsp;If&nbsp;one&nbsp;of&nbsp;parameters&nbsp;is&nbsp;not&nbsp;estimated,&nbsp;it's&nbsp;deviation&nbsp;is&nbsp;equals&nbsp;to&nbsp;zero.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;stdDeviationsExtrinsics&nbsp;Output&nbsp;vector&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;estimated&nbsp;for&nbsp;extrinsic&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Order&nbsp;of&nbsp;deviations&nbsp;values:&nbsp;\f$(R_1,&nbsp;T_1,&nbsp;\dotsc&nbsp;,&nbsp;R_M,&nbsp;T_M)\f$&nbsp;where&nbsp;M&nbsp;is&nbsp;number&nbsp;of&nbsp;pattern&nbsp;views,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$R_i,&nbsp;T_i\f$&nbsp;are&nbsp;concatenated&nbsp;1x3&nbsp;vectors.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;perViewErrors&nbsp;Output&nbsp;vector&nbsp;of&nbsp;average&nbsp;re-projection&nbsp;errors&nbsp;estimated&nbsp;for&nbsp;each&nbsp;pattern&nbsp;view.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;flags&nbsp;flags&nbsp;Different&nbsp;flags&nbsp;&nbsp;for&nbsp;the&nbsp;calibration&nbsp;process&nbsp;(see&nbsp;#calibrateCamera&nbsp;for&nbsp;details).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;criteria&nbsp;Termination&nbsp;criteria&nbsp;for&nbsp;the&nbsp;iterative&nbsp;optimization&nbsp;algorithm.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;calibrates&nbsp;a&nbsp;camera&nbsp;using&nbsp;an&nbsp;Aruco&nbsp;Board.&nbsp;The&nbsp;function&nbsp;receives&nbsp;a&nbsp;list&nbsp;of<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;detected&nbsp;markers&nbsp;from&nbsp;several&nbsp;views&nbsp;of&nbsp;the&nbsp;Board.&nbsp;The&nbsp;process&nbsp;is&nbsp;similar&nbsp;to&nbsp;the&nbsp;chessboard<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;calibration&nbsp;in&nbsp;calibrateCamera().&nbsp;The&nbsp;function&nbsp;returns&nbsp;the&nbsp;final&nbsp;re-projection&nbsp;error.</tt></dd></dl>
+ <dl><dt><a name="-calibrateCameraCharuco"><strong>calibrateCameraCharuco</strong></a>(...)</dt><dd><tt><a href="#-calibrateCameraCharuco">calibrateCameraCharuco</a>(charucoCorners,&nbsp;charucoIds,&nbsp;board,&nbsp;imageSize,&nbsp;cameraMatrix,&nbsp;distCoeffs[,&nbsp;rvecs[,&nbsp;tvecs[,&nbsp;flags[,&nbsp;criteria]]]])&nbsp;-&gt;&nbsp;retval,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvecs,&nbsp;tvecs<br>
+.&nbsp;&nbsp;&nbsp;@brief&nbsp;It's&nbsp;the&nbsp;same&nbsp;function&nbsp;as&nbsp;#calibrateCameraCharuco&nbsp;but&nbsp;without&nbsp;calibration&nbsp;error&nbsp;estimation.</tt></dd></dl>
+ <dl><dt><a name="-calibrateCameraCharucoExtended"><strong>calibrateCameraCharucoExtended</strong></a>(...)</dt><dd><tt><a href="#-calibrateCameraCharucoExtended">calibrateCameraCharucoExtended</a>(charucoCorners,&nbsp;charucoIds,&nbsp;board,&nbsp;imageSize,&nbsp;cameraMatrix,&nbsp;distCoeffs[,&nbsp;rvecs[,&nbsp;tvecs[,&nbsp;stdDeviationsIntrinsics[,&nbsp;stdDeviationsExtrinsics[,&nbsp;perViewErrors[,&nbsp;flags[,&nbsp;criteria]]]]]]])&nbsp;-&gt;&nbsp;retval,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvecs,&nbsp;tvecs,&nbsp;stdDeviationsIntrinsics,&nbsp;stdDeviationsExtrinsics,&nbsp;perViewErrors<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Calibrate&nbsp;a&nbsp;camera&nbsp;using&nbsp;Charuco&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoCorners&nbsp;vector&nbsp;of&nbsp;detected&nbsp;charuco&nbsp;corners&nbsp;per&nbsp;frame<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoIds&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;corner&nbsp;in&nbsp;charucoCorners&nbsp;per&nbsp;frame<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;Marker&nbsp;Board&nbsp;layout<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;imageSize&nbsp;input&nbsp;image&nbsp;size<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;Output&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$&nbsp;.&nbsp;If&nbsp;CV\_CALIB\_USE\_INTRINSIC\_GUESS<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and/or&nbsp;CV_CALIB_FIX_ASPECT_RATIO&nbsp;are&nbsp;specified,&nbsp;some&nbsp;or&nbsp;all&nbsp;of&nbsp;fx,&nbsp;fy,&nbsp;cx,&nbsp;cy&nbsp;must&nbsp;be<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;initialized&nbsp;before&nbsp;calling&nbsp;the&nbsp;function.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvecs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;rotation&nbsp;vectors&nbsp;(see&nbsp;Rodrigues&nbsp;)&nbsp;estimated&nbsp;for&nbsp;each&nbsp;board&nbsp;view<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(e.g.&nbsp;std::vector&lt;cv::Mat&gt;&gt;).&nbsp;That&nbsp;is,&nbsp;each&nbsp;k-th&nbsp;rotation&nbsp;vector&nbsp;together&nbsp;with&nbsp;the&nbsp;corresponding<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;k-th&nbsp;translation&nbsp;vector&nbsp;(see&nbsp;the&nbsp;next&nbsp;output&nbsp;parameter&nbsp;description)&nbsp;brings&nbsp;the&nbsp;board&nbsp;pattern<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;from&nbsp;the&nbsp;model&nbsp;coordinate&nbsp;space&nbsp;(in&nbsp;which&nbsp;object&nbsp;points&nbsp;are&nbsp;specified)&nbsp;to&nbsp;the&nbsp;world&nbsp;coordinate<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;space,&nbsp;that&nbsp;is,&nbsp;a&nbsp;real&nbsp;position&nbsp;of&nbsp;the&nbsp;board&nbsp;pattern&nbsp;in&nbsp;the&nbsp;k-th&nbsp;pattern&nbsp;view&nbsp;(k=0..&nbsp;*M*&nbsp;-1).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvecs&nbsp;Output&nbsp;vector&nbsp;of&nbsp;translation&nbsp;vectors&nbsp;estimated&nbsp;for&nbsp;each&nbsp;pattern&nbsp;view.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;stdDeviationsIntrinsics&nbsp;Output&nbsp;vector&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;estimated&nbsp;for&nbsp;intrinsic&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Order&nbsp;of&nbsp;deviations&nbsp;values:<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(f_x,&nbsp;f_y,&nbsp;c_x,&nbsp;c_y,&nbsp;k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2,&nbsp;k_3,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6&nbsp;,&nbsp;s_1,&nbsp;s_2,&nbsp;s_3,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;s_4,&nbsp;\tau_x,&nbsp;\tau_y)\f$&nbsp;If&nbsp;one&nbsp;of&nbsp;parameters&nbsp;is&nbsp;not&nbsp;estimated,&nbsp;it's&nbsp;deviation&nbsp;is&nbsp;equals&nbsp;to&nbsp;zero.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;stdDeviationsExtrinsics&nbsp;Output&nbsp;vector&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;estimated&nbsp;for&nbsp;extrinsic&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Order&nbsp;of&nbsp;deviations&nbsp;values:&nbsp;\f$(R_1,&nbsp;T_1,&nbsp;\dotsc&nbsp;,&nbsp;R_M,&nbsp;T_M)\f$&nbsp;where&nbsp;M&nbsp;is&nbsp;number&nbsp;of&nbsp;pattern&nbsp;views,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$R_i,&nbsp;T_i\f$&nbsp;are&nbsp;concatenated&nbsp;1x3&nbsp;vectors.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;perViewErrors&nbsp;Output&nbsp;vector&nbsp;of&nbsp;average&nbsp;re-projection&nbsp;errors&nbsp;estimated&nbsp;for&nbsp;each&nbsp;pattern&nbsp;view.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;flags&nbsp;flags&nbsp;Different&nbsp;flags&nbsp;&nbsp;for&nbsp;the&nbsp;calibration&nbsp;process&nbsp;(see&nbsp;#calibrateCamera&nbsp;for&nbsp;details).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;criteria&nbsp;Termination&nbsp;criteria&nbsp;for&nbsp;the&nbsp;iterative&nbsp;optimization&nbsp;algorithm.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;calibrates&nbsp;a&nbsp;camera&nbsp;using&nbsp;a&nbsp;set&nbsp;of&nbsp;corners&nbsp;of&nbsp;a&nbsp;&nbsp;Charuco&nbsp;Board.&nbsp;The&nbsp;function<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;receives&nbsp;a&nbsp;list&nbsp;of&nbsp;detected&nbsp;corners&nbsp;and&nbsp;its&nbsp;identifiers&nbsp;from&nbsp;several&nbsp;views&nbsp;of&nbsp;the&nbsp;Board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;function&nbsp;returns&nbsp;the&nbsp;final&nbsp;re-projection&nbsp;error.</tt></dd></dl>
+ <dl><dt><a name="-custom_dictionary"><strong>custom_dictionary</strong></a>(...)</dt><dd><tt><a href="#-custom_dictionary">custom_dictionary</a>(nMarkers,&nbsp;markerSize[,&nbsp;randomSeed])&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@see&nbsp;generateCustomDictionary</tt></dd></dl>
+ <dl><dt><a name="-custom_dictionary_from"><strong>custom_dictionary_from</strong></a>(...)</dt><dd><tt><a href="#-custom_dictionary_from">custom_dictionary_from</a>(nMarkers,&nbsp;markerSize,&nbsp;baseDictionary[,&nbsp;randomSeed])&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Generates&nbsp;a&nbsp;new&nbsp;customizable&nbsp;marker&nbsp;dictionary<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;nMarkers&nbsp;number&nbsp;of&nbsp;markers&nbsp;in&nbsp;the&nbsp;dictionary<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerSize&nbsp;number&nbsp;of&nbsp;bits&nbsp;per&nbsp;dimension&nbsp;of&nbsp;each&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;baseDictionary&nbsp;Include&nbsp;the&nbsp;markers&nbsp;in&nbsp;this&nbsp;dictionary&nbsp;at&nbsp;the&nbsp;beginning&nbsp;(optional)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;randomSeed&nbsp;a&nbsp;user&nbsp;supplied&nbsp;seed&nbsp;for&nbsp;theRNG()<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;creates&nbsp;a&nbsp;new&nbsp;dictionary&nbsp;composed&nbsp;by&nbsp;nMarkers&nbsp;markers&nbsp;and&nbsp;each&nbsp;markers&nbsp;composed<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;by&nbsp;markerSize&nbsp;x&nbsp;markerSize&nbsp;bits.&nbsp;If&nbsp;baseDictionary&nbsp;is&nbsp;provided,&nbsp;its&nbsp;markers&nbsp;are&nbsp;directly<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;included&nbsp;and&nbsp;the&nbsp;rest&nbsp;are&nbsp;generated&nbsp;based&nbsp;on&nbsp;them.&nbsp;If&nbsp;the&nbsp;size&nbsp;of&nbsp;baseDictionary&nbsp;is&nbsp;higher<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;than&nbsp;nMarkers,&nbsp;only&nbsp;the&nbsp;first&nbsp;nMarkers&nbsp;in&nbsp;baseDictionary&nbsp;are&nbsp;taken&nbsp;and&nbsp;no&nbsp;new&nbsp;marker&nbsp;is&nbsp;added.</tt></dd></dl>
+ <dl><dt><a name="-detectCharucoDiamond"><strong>detectCharucoDiamond</strong></a>(...)</dt><dd><tt><a href="#-detectCharucoDiamond">detectCharucoDiamond</a>(image,&nbsp;markerCorners,&nbsp;markerIds,&nbsp;squareMarkerLengthRate[,&nbsp;diamondCorners[,&nbsp;diamondIds[,&nbsp;cameraMatrix[,&nbsp;distCoeffs]]]])&nbsp;-&gt;&nbsp;diamondCorners,&nbsp;diamondIds<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Detect&nbsp;ChArUco&nbsp;Diamond&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input&nbsp;image&nbsp;necessary&nbsp;for&nbsp;corner&nbsp;subpixel.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerCorners&nbsp;list&nbsp;of&nbsp;detected&nbsp;marker&nbsp;corners&nbsp;from&nbsp;detectMarkers&nbsp;function.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerIds&nbsp;list&nbsp;of&nbsp;marker&nbsp;ids&nbsp;in&nbsp;markerCorners.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;squareMarkerLengthRate&nbsp;rate&nbsp;between&nbsp;square&nbsp;and&nbsp;marker&nbsp;length:<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;squareMarkerLengthRate&nbsp;=&nbsp;squareLength/markerLength.&nbsp;The&nbsp;real&nbsp;units&nbsp;are&nbsp;not&nbsp;necessary.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;diamondCorners&nbsp;output&nbsp;list&nbsp;of&nbsp;detected&nbsp;diamond&nbsp;corners&nbsp;(4&nbsp;corners&nbsp;per&nbsp;diamond).&nbsp;The&nbsp;order<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;is&nbsp;the&nbsp;same&nbsp;than&nbsp;in&nbsp;marker&nbsp;corners:&nbsp;top&nbsp;left,&nbsp;top&nbsp;right,&nbsp;bottom&nbsp;right&nbsp;and&nbsp;bottom&nbsp;left.&nbsp;Similar<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;format&nbsp;than&nbsp;the&nbsp;corners&nbsp;returned&nbsp;by&nbsp;detectMarkers&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;diamondIds&nbsp;ids&nbsp;of&nbsp;the&nbsp;diamonds&nbsp;in&nbsp;diamondCorners.&nbsp;The&nbsp;id&nbsp;of&nbsp;each&nbsp;diamond&nbsp;is&nbsp;in&nbsp;fact&nbsp;of<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;type&nbsp;Vec4i,&nbsp;so&nbsp;each&nbsp;diamond&nbsp;has&nbsp;4&nbsp;ids,&nbsp;which&nbsp;are&nbsp;the&nbsp;ids&nbsp;of&nbsp;the&nbsp;aruco&nbsp;markers&nbsp;composing&nbsp;the<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;diamond.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;Optional&nbsp;camera&nbsp;calibration&nbsp;matrix.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;Optional&nbsp;camera&nbsp;distortion&nbsp;coefficients.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;detects&nbsp;Diamond&nbsp;markers&nbsp;from&nbsp;the&nbsp;previous&nbsp;detected&nbsp;ArUco&nbsp;markers.&nbsp;The&nbsp;diamonds<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;returned&nbsp;in&nbsp;the&nbsp;diamondCorners&nbsp;and&nbsp;diamondIds&nbsp;parameters.&nbsp;If&nbsp;camera&nbsp;calibration&nbsp;parameters<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;provided,&nbsp;the&nbsp;diamond&nbsp;search&nbsp;is&nbsp;based&nbsp;on&nbsp;reprojection.&nbsp;If&nbsp;not,&nbsp;diamond&nbsp;search&nbsp;is&nbsp;based&nbsp;on<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;homography.&nbsp;Homography&nbsp;is&nbsp;faster&nbsp;than&nbsp;reprojection&nbsp;but&nbsp;can&nbsp;slightly&nbsp;reduce&nbsp;the&nbsp;detection&nbsp;rate.</tt></dd></dl>
+ <dl><dt><a name="-detectMarkers"><strong>detectMarkers</strong></a>(...)</dt><dd><tt><a href="#-detectMarkers">detectMarkers</a>(image,&nbsp;dictionary[,&nbsp;corners[,&nbsp;ids[,&nbsp;parameters[,&nbsp;rejectedImgPoints[,&nbsp;cameraMatrix[,&nbsp;distCoeff]]]]]])&nbsp;-&gt;&nbsp;corners,&nbsp;ids,&nbsp;rejectedImgPoints<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Basic&nbsp;marker&nbsp;detection<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;dictionary&nbsp;indicates&nbsp;the&nbsp;type&nbsp;of&nbsp;markers&nbsp;that&nbsp;will&nbsp;be&nbsp;searched<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;corners&nbsp;vector&nbsp;of&nbsp;detected&nbsp;marker&nbsp;corners.&nbsp;For&nbsp;each&nbsp;marker,&nbsp;its&nbsp;four&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;provided,&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;dimensions&nbsp;of&nbsp;this&nbsp;array&nbsp;is&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;is&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ids&nbsp;vector&nbsp;of&nbsp;identifiers&nbsp;of&nbsp;the&nbsp;detected&nbsp;markers.&nbsp;The&nbsp;identifier&nbsp;is&nbsp;of&nbsp;type&nbsp;int<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(e.g.&nbsp;std::vector&lt;int&gt;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,&nbsp;the&nbsp;size&nbsp;of&nbsp;ids&nbsp;is&nbsp;also&nbsp;N.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;identifiers&nbsp;have&nbsp;the&nbsp;same&nbsp;order&nbsp;than&nbsp;the&nbsp;markers&nbsp;in&nbsp;the&nbsp;imgPoints&nbsp;array.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;parameters&nbsp;marker&nbsp;detection&nbsp;parameters<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rejectedImgPoints&nbsp;contains&nbsp;the&nbsp;imgPoints&nbsp;of&nbsp;those&nbsp;squares&nbsp;whose&nbsp;inner&nbsp;code&nbsp;has&nbsp;not&nbsp;a<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;correct&nbsp;codification.&nbsp;Useful&nbsp;for&nbsp;debugging&nbsp;purposes.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;optional&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeff&nbsp;optional&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Performs&nbsp;marker&nbsp;detection&nbsp;in&nbsp;the&nbsp;input&nbsp;image.&nbsp;Only&nbsp;markers&nbsp;included&nbsp;in&nbsp;the&nbsp;specific&nbsp;dictionary<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;searched.&nbsp;For&nbsp;each&nbsp;detected&nbsp;marker,&nbsp;it&nbsp;returns&nbsp;the&nbsp;2D&nbsp;position&nbsp;of&nbsp;its&nbsp;corner&nbsp;in&nbsp;the&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and&nbsp;its&nbsp;corresponding&nbsp;identifier.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Note&nbsp;that&nbsp;this&nbsp;function&nbsp;does&nbsp;not&nbsp;perform&nbsp;pose&nbsp;estimation.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@sa&nbsp;estimatePoseSingleMarkers,&nbsp;&nbsp;estimatePoseBoard<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*</tt></dd></dl>
+ <dl><dt><a name="-drawAxis"><strong>drawAxis</strong></a>(...)</dt><dd><tt><a href="#-drawAxis">drawAxis</a>(image,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvec,&nbsp;tvec,&nbsp;length)&nbsp;-&gt;&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draw&nbsp;coordinate&nbsp;system&nbsp;axis&nbsp;from&nbsp;pose&nbsp;estimation<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input/output&nbsp;image.&nbsp;It&nbsp;must&nbsp;have&nbsp;1&nbsp;or&nbsp;3&nbsp;channels.&nbsp;The&nbsp;number&nbsp;of&nbsp;channels&nbsp;is&nbsp;not<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;altered.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvec&nbsp;rotation&nbsp;vector&nbsp;of&nbsp;the&nbsp;coordinate&nbsp;system&nbsp;that&nbsp;will&nbsp;be&nbsp;drawn.&nbsp;(@sa&nbsp;Rodrigues).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvec&nbsp;translation&nbsp;vector&nbsp;of&nbsp;the&nbsp;coordinate&nbsp;system&nbsp;that&nbsp;will&nbsp;be&nbsp;drawn.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;length&nbsp;length&nbsp;of&nbsp;the&nbsp;painted&nbsp;axis&nbsp;in&nbsp;the&nbsp;same&nbsp;unit&nbsp;than&nbsp;tvec&nbsp;(usually&nbsp;in&nbsp;meters)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Given&nbsp;the&nbsp;pose&nbsp;estimation&nbsp;of&nbsp;a&nbsp;marker&nbsp;or&nbsp;board,&nbsp;this&nbsp;function&nbsp;draws&nbsp;the&nbsp;axis&nbsp;of&nbsp;the&nbsp;world<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;coordinate&nbsp;system,&nbsp;i.e.&nbsp;the&nbsp;system&nbsp;centered&nbsp;on&nbsp;the&nbsp;marker/board.&nbsp;Useful&nbsp;for&nbsp;debugging&nbsp;purposes.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@deprecated&nbsp;use&nbsp;cv::drawFrameAxes</tt></dd></dl>
+ <dl><dt><a name="-drawDetectedCornersCharuco"><strong>drawDetectedCornersCharuco</strong></a>(...)</dt><dd><tt><a href="#-drawDetectedCornersCharuco">drawDetectedCornersCharuco</a>(image,&nbsp;charucoCorners[,&nbsp;charucoIds[,&nbsp;cornerColor]])&nbsp;-&gt;&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draws&nbsp;a&nbsp;set&nbsp;of&nbsp;Charuco&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input/output&nbsp;image.&nbsp;It&nbsp;must&nbsp;have&nbsp;1&nbsp;or&nbsp;3&nbsp;channels.&nbsp;The&nbsp;number&nbsp;of&nbsp;channels&nbsp;is&nbsp;not<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;altered.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoCorners&nbsp;vector&nbsp;of&nbsp;detected&nbsp;charuco&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoIds&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;corner&nbsp;in&nbsp;charucoCorners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cornerColor&nbsp;color&nbsp;of&nbsp;the&nbsp;square&nbsp;surrounding&nbsp;each&nbsp;corner<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;draws&nbsp;a&nbsp;set&nbsp;of&nbsp;detected&nbsp;Charuco&nbsp;corners.&nbsp;If&nbsp;identifiers&nbsp;vector&nbsp;is&nbsp;provided,&nbsp;it&nbsp;also<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;draws&nbsp;the&nbsp;id&nbsp;of&nbsp;each&nbsp;corner.</tt></dd></dl>
+ <dl><dt><a name="-drawDetectedDiamonds"><strong>drawDetectedDiamonds</strong></a>(...)</dt><dd><tt><a href="#-drawDetectedDiamonds">drawDetectedDiamonds</a>(image,&nbsp;diamondCorners[,&nbsp;diamondIds[,&nbsp;borderColor]])&nbsp;-&gt;&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draw&nbsp;a&nbsp;set&nbsp;of&nbsp;detected&nbsp;ChArUco&nbsp;Diamond&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input/output&nbsp;image.&nbsp;It&nbsp;must&nbsp;have&nbsp;1&nbsp;or&nbsp;3&nbsp;channels.&nbsp;The&nbsp;number&nbsp;of&nbsp;channels&nbsp;is&nbsp;not<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;altered.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;diamondCorners&nbsp;positions&nbsp;of&nbsp;diamond&nbsp;corners&nbsp;in&nbsp;the&nbsp;same&nbsp;format&nbsp;returned&nbsp;by<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<a href="#-detectCharucoDiamond">detectCharucoDiamond</a>().&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;dimensions&nbsp;of&nbsp;this&nbsp;array&nbsp;should&nbsp;be&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;should&nbsp;be&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;diamondIds&nbsp;vector&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;diamonds&nbsp;in&nbsp;diamondCorners,&nbsp;in&nbsp;the&nbsp;same&nbsp;format<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;returned&nbsp;by&nbsp;<a href="#-detectCharucoDiamond">detectCharucoDiamond</a>()&nbsp;(e.g.&nbsp;std::vector&lt;Vec4i&gt;).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Optional,&nbsp;if&nbsp;not&nbsp;provided,&nbsp;ids&nbsp;are&nbsp;not&nbsp;painted.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;borderColor&nbsp;color&nbsp;of&nbsp;marker&nbsp;borders.&nbsp;Rest&nbsp;of&nbsp;colors&nbsp;(text&nbsp;color&nbsp;and&nbsp;first&nbsp;corner&nbsp;color)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;calculated&nbsp;based&nbsp;on&nbsp;this&nbsp;one.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Given&nbsp;an&nbsp;array&nbsp;of&nbsp;detected&nbsp;diamonds,&nbsp;this&nbsp;functions&nbsp;draws&nbsp;them&nbsp;in&nbsp;the&nbsp;image.&nbsp;The&nbsp;marker&nbsp;borders<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;painted&nbsp;and&nbsp;the&nbsp;markers&nbsp;identifiers&nbsp;if&nbsp;provided.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Useful&nbsp;for&nbsp;debugging&nbsp;purposes.</tt></dd></dl>
+ <dl><dt><a name="-drawDetectedMarkers"><strong>drawDetectedMarkers</strong></a>(...)</dt><dd><tt><a href="#-drawDetectedMarkers">drawDetectedMarkers</a>(image,&nbsp;corners[,&nbsp;ids[,&nbsp;borderColor]])&nbsp;-&gt;&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draw&nbsp;detected&nbsp;markers&nbsp;in&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input/output&nbsp;image.&nbsp;It&nbsp;must&nbsp;have&nbsp;1&nbsp;or&nbsp;3&nbsp;channels.&nbsp;The&nbsp;number&nbsp;of&nbsp;channels&nbsp;is&nbsp;not<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;altered.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;corners&nbsp;positions&nbsp;of&nbsp;marker&nbsp;corners&nbsp;on&nbsp;input&nbsp;image.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,&nbsp;the&nbsp;dimensions&nbsp;of<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;this&nbsp;array&nbsp;should&nbsp;be&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;should&nbsp;be&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ids&nbsp;vector&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;markers&nbsp;in&nbsp;markersCorners&nbsp;.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Optional,&nbsp;if&nbsp;not&nbsp;provided,&nbsp;ids&nbsp;are&nbsp;not&nbsp;painted.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;borderColor&nbsp;color&nbsp;of&nbsp;marker&nbsp;borders.&nbsp;Rest&nbsp;of&nbsp;colors&nbsp;(text&nbsp;color&nbsp;and&nbsp;first&nbsp;corner&nbsp;color)<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;calculated&nbsp;based&nbsp;on&nbsp;this&nbsp;one&nbsp;to&nbsp;improve&nbsp;visualization.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Given&nbsp;an&nbsp;array&nbsp;of&nbsp;detected&nbsp;marker&nbsp;corners&nbsp;and&nbsp;its&nbsp;corresponding&nbsp;ids,&nbsp;this&nbsp;functions&nbsp;draws<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;markers&nbsp;in&nbsp;the&nbsp;image.&nbsp;The&nbsp;marker&nbsp;borders&nbsp;are&nbsp;painted&nbsp;and&nbsp;the&nbsp;markers&nbsp;identifiers&nbsp;if&nbsp;provided.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Useful&nbsp;for&nbsp;debugging&nbsp;purposes.</tt></dd></dl>
+ <dl><dt><a name="-drawMarker"><strong>drawMarker</strong></a>(...)</dt><dd><tt><a href="#-drawMarker">drawMarker</a>(dictionary,&nbsp;id,&nbsp;sidePixels[,&nbsp;img[,&nbsp;borderBits]])&nbsp;-&gt;&nbsp;img<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draw&nbsp;a&nbsp;canonical&nbsp;marker&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;dictionary&nbsp;dictionary&nbsp;of&nbsp;markers&nbsp;indicating&nbsp;the&nbsp;type&nbsp;of&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;id&nbsp;identifier&nbsp;of&nbsp;the&nbsp;marker&nbsp;that&nbsp;will&nbsp;be&nbsp;returned.&nbsp;It&nbsp;has&nbsp;to&nbsp;be&nbsp;a&nbsp;valid&nbsp;id<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;the&nbsp;specified&nbsp;dictionary.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;sidePixels&nbsp;size&nbsp;of&nbsp;the&nbsp;image&nbsp;in&nbsp;pixels<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;img&nbsp;output&nbsp;image&nbsp;with&nbsp;the&nbsp;marker<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;borderBits&nbsp;width&nbsp;of&nbsp;the&nbsp;marker&nbsp;border.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;marker&nbsp;image&nbsp;in&nbsp;its&nbsp;canonical&nbsp;form&nbsp;(i.e.&nbsp;ready&nbsp;to&nbsp;be&nbsp;printed)</tt></dd></dl>
+ <dl><dt><a name="-drawPlanarBoard"><strong>drawPlanarBoard</strong></a>(...)</dt><dd><tt><a href="#-drawPlanarBoard">drawPlanarBoard</a>(board,&nbsp;outSize[,&nbsp;img[,&nbsp;marginSize[,&nbsp;borderBits]]])&nbsp;-&gt;&nbsp;img<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Draw&nbsp;a&nbsp;planar&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@sa&nbsp;_drawPlanarBoardImpl<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;layout&nbsp;of&nbsp;the&nbsp;board&nbsp;that&nbsp;will&nbsp;be&nbsp;drawn.&nbsp;The&nbsp;board&nbsp;should&nbsp;be&nbsp;planar,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;z&nbsp;coordinate&nbsp;is&nbsp;ignored<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;outSize&nbsp;size&nbsp;of&nbsp;the&nbsp;output&nbsp;image&nbsp;in&nbsp;pixels.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;img&nbsp;output&nbsp;image&nbsp;with&nbsp;the&nbsp;board.&nbsp;The&nbsp;size&nbsp;of&nbsp;this&nbsp;image&nbsp;will&nbsp;be&nbsp;outSize<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and&nbsp;the&nbsp;board&nbsp;will&nbsp;be&nbsp;on&nbsp;the&nbsp;center,&nbsp;keeping&nbsp;the&nbsp;board&nbsp;proportions.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;marginSize&nbsp;minimum&nbsp;margins&nbsp;(in&nbsp;pixels)&nbsp;of&nbsp;the&nbsp;board&nbsp;in&nbsp;the&nbsp;output&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;borderBits&nbsp;width&nbsp;of&nbsp;the&nbsp;marker&nbsp;borders.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;return&nbsp;the&nbsp;image&nbsp;of&nbsp;a&nbsp;planar&nbsp;board,&nbsp;ready&nbsp;to&nbsp;be&nbsp;printed.&nbsp;It&nbsp;assumes<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;Board&nbsp;layout&nbsp;specified&nbsp;is&nbsp;planar&nbsp;by&nbsp;ignoring&nbsp;the&nbsp;z&nbsp;coordinates&nbsp;of&nbsp;the&nbsp;object&nbsp;points.</tt></dd></dl>
+ <dl><dt><a name="-estimatePoseBoard"><strong>estimatePoseBoard</strong></a>(...)</dt><dd><tt><a href="#-estimatePoseBoard">estimatePoseBoard</a>(corners,&nbsp;ids,&nbsp;board,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvec,&nbsp;tvec[,&nbsp;useExtrinsicGuess])&nbsp;-&gt;&nbsp;retval,&nbsp;rvec,&nbsp;tvec<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Pose&nbsp;estimation&nbsp;for&nbsp;a&nbsp;board&nbsp;of&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;corners&nbsp;vector&nbsp;of&nbsp;already&nbsp;detected&nbsp;markers&nbsp;corners.&nbsp;For&nbsp;each&nbsp;marker,&nbsp;its&nbsp;four&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;provided,&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,&nbsp;the<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;dimensions&nbsp;of&nbsp;this&nbsp;array&nbsp;should&nbsp;be&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;should&nbsp;be&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ids&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;marker&nbsp;in&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;layout&nbsp;of&nbsp;markers&nbsp;in&nbsp;the&nbsp;board.&nbsp;The&nbsp;layout&nbsp;is&nbsp;composed&nbsp;by&nbsp;the&nbsp;marker&nbsp;identifiers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;and&nbsp;the&nbsp;positions&nbsp;of&nbsp;each&nbsp;marker&nbsp;corner&nbsp;in&nbsp;the&nbsp;board&nbsp;reference&nbsp;system.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvec&nbsp;Output&nbsp;vector&nbsp;(e.g.&nbsp;cv::Mat)&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;rotation&nbsp;vector&nbsp;of&nbsp;the&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(see&nbsp;cv::Rodrigues).&nbsp;Used&nbsp;as&nbsp;initial&nbsp;guess&nbsp;if&nbsp;not&nbsp;empty.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvec&nbsp;Output&nbsp;vector&nbsp;(e.g.&nbsp;cv::Mat)&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;translation&nbsp;vector&nbsp;of&nbsp;the&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;useExtrinsicGuess&nbsp;defines&nbsp;whether&nbsp;initial&nbsp;guess&nbsp;for&nbsp;\b&nbsp;rvec&nbsp;and&nbsp;\b&nbsp;tvec&nbsp;will&nbsp;be&nbsp;used&nbsp;or&nbsp;not.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Used&nbsp;as&nbsp;initial&nbsp;guess&nbsp;if&nbsp;not&nbsp;empty.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;receives&nbsp;the&nbsp;detected&nbsp;markers&nbsp;and&nbsp;returns&nbsp;the&nbsp;pose&nbsp;of&nbsp;a&nbsp;marker&nbsp;board&nbsp;composed<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;by&nbsp;those&nbsp;markers.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;Board&nbsp;of&nbsp;marker&nbsp;has&nbsp;a&nbsp;single&nbsp;world&nbsp;coordinate&nbsp;system&nbsp;which&nbsp;is&nbsp;defined&nbsp;by&nbsp;the&nbsp;board&nbsp;layout.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;returned&nbsp;transformation&nbsp;is&nbsp;the&nbsp;one&nbsp;that&nbsp;transforms&nbsp;points&nbsp;from&nbsp;the&nbsp;board&nbsp;coordinate&nbsp;system<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;to&nbsp;the&nbsp;camera&nbsp;coordinate&nbsp;system.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Input&nbsp;markers&nbsp;that&nbsp;are&nbsp;not&nbsp;included&nbsp;in&nbsp;the&nbsp;board&nbsp;layout&nbsp;are&nbsp;ignored.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;function&nbsp;returns&nbsp;the&nbsp;number&nbsp;of&nbsp;markers&nbsp;from&nbsp;the&nbsp;input&nbsp;employed&nbsp;for&nbsp;the&nbsp;board&nbsp;pose&nbsp;estimation.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Note&nbsp;that&nbsp;returning&nbsp;a&nbsp;0&nbsp;means&nbsp;the&nbsp;pose&nbsp;has&nbsp;not&nbsp;been&nbsp;estimated.</tt></dd></dl>
+ <dl><dt><a name="-estimatePoseCharucoBoard"><strong>estimatePoseCharucoBoard</strong></a>(...)</dt><dd><tt><a href="#-estimatePoseCharucoBoard">estimatePoseCharucoBoard</a>(charucoCorners,&nbsp;charucoIds,&nbsp;board,&nbsp;cameraMatrix,&nbsp;distCoeffs,&nbsp;rvec,&nbsp;tvec[,&nbsp;useExtrinsicGuess])&nbsp;-&gt;&nbsp;retval,&nbsp;rvec,&nbsp;tvec<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Pose&nbsp;estimation&nbsp;for&nbsp;a&nbsp;ChArUco&nbsp;board&nbsp;given&nbsp;some&nbsp;of&nbsp;their&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoCorners&nbsp;vector&nbsp;of&nbsp;detected&nbsp;charuco&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoIds&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;corner&nbsp;in&nbsp;charucoCorners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;layout&nbsp;of&nbsp;ChArUco&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvec&nbsp;Output&nbsp;vector&nbsp;(e.g.&nbsp;cv::Mat)&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;rotation&nbsp;vector&nbsp;of&nbsp;the&nbsp;board<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(see&nbsp;cv::Rodrigues).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvec&nbsp;Output&nbsp;vector&nbsp;(e.g.&nbsp;cv::Mat)&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;translation&nbsp;vector&nbsp;of&nbsp;the&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;useExtrinsicGuess&nbsp;defines&nbsp;whether&nbsp;initial&nbsp;guess&nbsp;for&nbsp;\b&nbsp;rvec&nbsp;and&nbsp;\b&nbsp;tvec&nbsp;will&nbsp;be&nbsp;used&nbsp;or&nbsp;not.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;estimates&nbsp;a&nbsp;Charuco&nbsp;board&nbsp;pose&nbsp;from&nbsp;some&nbsp;detected&nbsp;corners.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;function&nbsp;checks&nbsp;if&nbsp;the&nbsp;input&nbsp;corners&nbsp;are&nbsp;enough&nbsp;and&nbsp;valid&nbsp;to&nbsp;perform&nbsp;pose&nbsp;estimation.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;pose&nbsp;estimation&nbsp;is&nbsp;valid,&nbsp;returns&nbsp;true,&nbsp;else&nbsp;returns&nbsp;false.</tt></dd></dl>
+ <dl><dt><a name="-estimatePoseSingleMarkers"><strong>estimatePoseSingleMarkers</strong></a>(...)</dt><dd><tt><a href="#-estimatePoseSingleMarkers">estimatePoseSingleMarkers</a>(corners,&nbsp;markerLength,&nbsp;cameraMatrix,&nbsp;distCoeffs[,&nbsp;rvecs[,&nbsp;tvecs[,&nbsp;_objPoints]]])&nbsp;-&gt;&nbsp;rvecs,&nbsp;tvecs,&nbsp;_objPoints<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Pose&nbsp;estimation&nbsp;for&nbsp;single&nbsp;markers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;corners&nbsp;vector&nbsp;of&nbsp;already&nbsp;detected&nbsp;markers&nbsp;corners.&nbsp;For&nbsp;each&nbsp;marker,&nbsp;its&nbsp;four&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;provided,&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;dimensions&nbsp;of&nbsp;this&nbsp;array&nbsp;should&nbsp;be&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;should&nbsp;be&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@sa&nbsp;detectMarkers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerLength&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;markers'&nbsp;side.&nbsp;The&nbsp;returning&nbsp;translation&nbsp;vectors&nbsp;will<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;be&nbsp;in&nbsp;the&nbsp;same&nbsp;unit.&nbsp;Normally,&nbsp;unit&nbsp;is&nbsp;meters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rvecs&nbsp;array&nbsp;of&nbsp;output&nbsp;rotation&nbsp;vectors&nbsp;(@sa&nbsp;Rodrigues)&nbsp;(e.g.&nbsp;std::vector&lt;cv::Vec3d&gt;).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Each&nbsp;element&nbsp;in&nbsp;rvecs&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;specific&nbsp;marker&nbsp;in&nbsp;imgPoints.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;tvecs&nbsp;array&nbsp;of&nbsp;output&nbsp;translation&nbsp;vectors&nbsp;(e.g.&nbsp;std::vector&lt;cv::Vec3d&gt;).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Each&nbsp;element&nbsp;in&nbsp;tvecs&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;specific&nbsp;marker&nbsp;in&nbsp;imgPoints.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;_objPoints&nbsp;array&nbsp;of&nbsp;object&nbsp;points&nbsp;of&nbsp;all&nbsp;the&nbsp;marker&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;receives&nbsp;the&nbsp;detected&nbsp;markers&nbsp;and&nbsp;returns&nbsp;their&nbsp;pose&nbsp;estimation&nbsp;respect&nbsp;to<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;camera&nbsp;individually.&nbsp;So&nbsp;for&nbsp;each&nbsp;marker,&nbsp;one&nbsp;rotation&nbsp;and&nbsp;translation&nbsp;vector&nbsp;is&nbsp;returned.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;returned&nbsp;transformation&nbsp;is&nbsp;the&nbsp;one&nbsp;that&nbsp;transforms&nbsp;points&nbsp;from&nbsp;each&nbsp;marker&nbsp;coordinate&nbsp;system<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;to&nbsp;the&nbsp;camera&nbsp;coordinate&nbsp;system.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;marker&nbsp;corrdinate&nbsp;system&nbsp;is&nbsp;centered&nbsp;on&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;marker,&nbsp;with&nbsp;the&nbsp;Z&nbsp;axis<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;perpendicular&nbsp;to&nbsp;the&nbsp;marker&nbsp;plane.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;coordinates&nbsp;of&nbsp;the&nbsp;four&nbsp;corners&nbsp;of&nbsp;the&nbsp;marker&nbsp;in&nbsp;its&nbsp;own&nbsp;coordinate&nbsp;system&nbsp;are:<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(-markerLength/2,&nbsp;markerLength/2,&nbsp;0),&nbsp;(markerLength/2,&nbsp;markerLength/2,&nbsp;0),<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(markerLength/2,&nbsp;-markerLength/2,&nbsp;0),&nbsp;(-markerLength/2,&nbsp;-markerLength/2,&nbsp;0)</tt></dd></dl>
+ <dl><dt><a name="-getBoardObjectAndImagePoints"><strong>getBoardObjectAndImagePoints</strong></a>(...)</dt><dd><tt><a href="#-getBoardObjectAndImagePoints">getBoardObjectAndImagePoints</a>(board,&nbsp;detectedCorners,&nbsp;detectedIds[,&nbsp;objPoints[,&nbsp;imgPoints]])&nbsp;-&gt;&nbsp;objPoints,&nbsp;imgPoints<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Given&nbsp;a&nbsp;board&nbsp;configuration&nbsp;and&nbsp;a&nbsp;set&nbsp;of&nbsp;detected&nbsp;markers,&nbsp;returns&nbsp;the&nbsp;corresponding<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;image&nbsp;points&nbsp;and&nbsp;object&nbsp;points&nbsp;to&nbsp;call&nbsp;solvePnP<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;Marker&nbsp;board&nbsp;layout.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;detectedCorners&nbsp;List&nbsp;of&nbsp;detected&nbsp;marker&nbsp;corners&nbsp;of&nbsp;the&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;detectedIds&nbsp;List&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;marker.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;objPoints&nbsp;Vector&nbsp;of&nbsp;vectors&nbsp;of&nbsp;board&nbsp;marker&nbsp;points&nbsp;in&nbsp;the&nbsp;board&nbsp;coordinate&nbsp;space.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;imgPoints&nbsp;Vector&nbsp;of&nbsp;vectors&nbsp;of&nbsp;the&nbsp;projections&nbsp;of&nbsp;board&nbsp;marker&nbsp;corner&nbsp;points.</tt></dd></dl>
+ <dl><dt><a name="-getPredefinedDictionary"><strong>getPredefinedDictionary</strong></a>(...)</dt><dd><tt><a href="#-getPredefinedDictionary">getPredefinedDictionary</a>(dict)&nbsp;-&gt;&nbsp;retval<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Returns&nbsp;one&nbsp;of&nbsp;the&nbsp;predefined&nbsp;dictionaries&nbsp;referenced&nbsp;by&nbsp;DICT_*.</tt></dd></dl>
+ <dl><dt><a name="-interpolateCornersCharuco"><strong>interpolateCornersCharuco</strong></a>(...)</dt><dd><tt><a href="#-interpolateCornersCharuco">interpolateCornersCharuco</a>(markerCorners,&nbsp;markerIds,&nbsp;image,&nbsp;board[,&nbsp;charucoCorners[,&nbsp;charucoIds[,&nbsp;cameraMatrix[,&nbsp;distCoeffs[,&nbsp;minMarkers]]]]])&nbsp;-&gt;&nbsp;retval,&nbsp;charucoCorners,&nbsp;charucoIds<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Interpolate&nbsp;position&nbsp;of&nbsp;ChArUco&nbsp;board&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerCorners&nbsp;vector&nbsp;of&nbsp;already&nbsp;detected&nbsp;markers&nbsp;corners.&nbsp;For&nbsp;each&nbsp;marker,&nbsp;its&nbsp;four<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;corners&nbsp;are&nbsp;provided,&nbsp;(e.g&nbsp;std::vector&lt;std::vector&lt;cv::Point2f&gt;&nbsp;&gt;&nbsp;).&nbsp;For&nbsp;N&nbsp;detected&nbsp;markers,&nbsp;the<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;dimensions&nbsp;of&nbsp;this&nbsp;array&nbsp;should&nbsp;be&nbsp;Nx4.&nbsp;The&nbsp;order&nbsp;of&nbsp;the&nbsp;corners&nbsp;should&nbsp;be&nbsp;clockwise.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;markerIds&nbsp;list&nbsp;of&nbsp;identifiers&nbsp;for&nbsp;each&nbsp;marker&nbsp;in&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input&nbsp;image&nbsp;necesary&nbsp;for&nbsp;corner&nbsp;refinement.&nbsp;Note&nbsp;that&nbsp;markers&nbsp;are&nbsp;not&nbsp;detected&nbsp;and<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;should&nbsp;be&nbsp;sent&nbsp;in&nbsp;corners&nbsp;and&nbsp;ids&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;layout&nbsp;of&nbsp;ChArUco&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoCorners&nbsp;interpolated&nbsp;chessboard&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;charucoIds&nbsp;interpolated&nbsp;chessboard&nbsp;corners&nbsp;identifiers<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;optional&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;optional&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;minMarkers&nbsp;number&nbsp;of&nbsp;adjacent&nbsp;markers&nbsp;that&nbsp;must&nbsp;be&nbsp;detected&nbsp;to&nbsp;return&nbsp;a&nbsp;charuco&nbsp;corner<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;receives&nbsp;the&nbsp;detected&nbsp;markers&nbsp;and&nbsp;returns&nbsp;the&nbsp;2D&nbsp;position&nbsp;of&nbsp;the&nbsp;chessboard&nbsp;corners<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;from&nbsp;a&nbsp;ChArUco&nbsp;board&nbsp;using&nbsp;the&nbsp;detected&nbsp;Aruco&nbsp;markers.&nbsp;If&nbsp;camera&nbsp;parameters&nbsp;are&nbsp;provided,<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;process&nbsp;is&nbsp;based&nbsp;in&nbsp;an&nbsp;approximated&nbsp;pose&nbsp;estimation,&nbsp;else&nbsp;it&nbsp;is&nbsp;based&nbsp;on&nbsp;local&nbsp;homography.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Only&nbsp;visible&nbsp;corners&nbsp;are&nbsp;returned.&nbsp;For&nbsp;each&nbsp;corner,&nbsp;its&nbsp;corresponding&nbsp;identifier&nbsp;is<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;also&nbsp;returned&nbsp;in&nbsp;charucoIds.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;function&nbsp;returns&nbsp;the&nbsp;number&nbsp;of&nbsp;interpolated&nbsp;corners.</tt></dd></dl>
+ <dl><dt><a name="-refineDetectedMarkers"><strong>refineDetectedMarkers</strong></a>(...)</dt><dd><tt><a href="#-refineDetectedMarkers">refineDetectedMarkers</a>(image,&nbsp;board,&nbsp;detectedCorners,&nbsp;detectedIds,&nbsp;rejectedCorners[,&nbsp;cameraMatrix[,&nbsp;distCoeffs[,&nbsp;minRepDistance[,&nbsp;errorCorrectionRate[,&nbsp;checkAllOrders[,&nbsp;recoveredIdxs[,&nbsp;parameters]]]]]]])&nbsp;-&gt;&nbsp;detectedCorners,&nbsp;detectedIds,&nbsp;rejectedCorners,&nbsp;recoveredIdxs<br>
+.&nbsp;&nbsp;&nbsp;*&nbsp;@brief&nbsp;Refind&nbsp;not&nbsp;detected&nbsp;markers&nbsp;based&nbsp;on&nbsp;the&nbsp;already&nbsp;detected&nbsp;and&nbsp;the&nbsp;board&nbsp;layout<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;image&nbsp;input&nbsp;image<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;board&nbsp;layout&nbsp;of&nbsp;markers&nbsp;in&nbsp;the&nbsp;board.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;detectedCorners&nbsp;vector&nbsp;of&nbsp;already&nbsp;detected&nbsp;marker&nbsp;corners.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;detectedIds&nbsp;vector&nbsp;of&nbsp;already&nbsp;detected&nbsp;marker&nbsp;identifiers.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;rejectedCorners&nbsp;vector&nbsp;of&nbsp;rejected&nbsp;candidates&nbsp;during&nbsp;the&nbsp;marker&nbsp;detection&nbsp;process.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;cameraMatrix&nbsp;optional&nbsp;input&nbsp;3x3&nbsp;floating-point&nbsp;camera&nbsp;matrix<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$A&nbsp;=&nbsp;\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;distCoeffs&nbsp;optional&nbsp;vector&nbsp;of&nbsp;distortion&nbsp;coefficients<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;\f$(k_1,&nbsp;k_2,&nbsp;p_1,&nbsp;p_2[,&nbsp;k_3[,&nbsp;k_4,&nbsp;k_5,&nbsp;k_6],[s_1,&nbsp;s_2,&nbsp;s_3,&nbsp;s_4]])\f$&nbsp;of&nbsp;4,&nbsp;5,&nbsp;8&nbsp;or&nbsp;12&nbsp;elements<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;minRepDistance&nbsp;minimum&nbsp;distance&nbsp;between&nbsp;the&nbsp;corners&nbsp;of&nbsp;the&nbsp;rejected&nbsp;candidate&nbsp;and&nbsp;the<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;reprojected&nbsp;marker&nbsp;in&nbsp;order&nbsp;to&nbsp;consider&nbsp;it&nbsp;as&nbsp;a&nbsp;correspondence.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;errorCorrectionRate&nbsp;rate&nbsp;of&nbsp;allowed&nbsp;erroneous&nbsp;bits&nbsp;respect&nbsp;to&nbsp;the&nbsp;error&nbsp;correction<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;capability&nbsp;of&nbsp;the&nbsp;used&nbsp;dictionary.&nbsp;-1&nbsp;ignores&nbsp;the&nbsp;error&nbsp;correction&nbsp;step.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;checkAllOrders&nbsp;Consider&nbsp;the&nbsp;four&nbsp;posible&nbsp;corner&nbsp;orders&nbsp;in&nbsp;the&nbsp;rejectedCorners&nbsp;array.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;it&nbsp;set&nbsp;to&nbsp;false,&nbsp;only&nbsp;the&nbsp;provided&nbsp;corner&nbsp;order&nbsp;is&nbsp;considered&nbsp;(default&nbsp;true).<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;recoveredIdxs&nbsp;Optional&nbsp;array&nbsp;to&nbsp;returns&nbsp;the&nbsp;indexes&nbsp;of&nbsp;the&nbsp;recovered&nbsp;candidates&nbsp;in&nbsp;the<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;original&nbsp;rejectedCorners&nbsp;array.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;parameters&nbsp;marker&nbsp;detection&nbsp;parameters<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;function&nbsp;tries&nbsp;to&nbsp;find&nbsp;markers&nbsp;that&nbsp;were&nbsp;not&nbsp;detected&nbsp;in&nbsp;the&nbsp;basic&nbsp;detecMarkers&nbsp;function.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;First,&nbsp;based&nbsp;on&nbsp;the&nbsp;current&nbsp;detected&nbsp;marker&nbsp;and&nbsp;the&nbsp;board&nbsp;layout,&nbsp;the&nbsp;function&nbsp;interpolates<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;missing&nbsp;markers.&nbsp;Then&nbsp;it&nbsp;tries&nbsp;to&nbsp;find&nbsp;correspondence&nbsp;between&nbsp;the&nbsp;reprojected<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;markers&nbsp;and&nbsp;the&nbsp;rejected&nbsp;candidates&nbsp;based&nbsp;on&nbsp;the&nbsp;minRepDistance&nbsp;and&nbsp;errorCorrectionRate<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;parameters.<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;camera&nbsp;parameters&nbsp;and&nbsp;distortion&nbsp;coefficients&nbsp;are&nbsp;provided,&nbsp;missing&nbsp;markers&nbsp;are&nbsp;reprojected<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;using&nbsp;projectPoint&nbsp;function.&nbsp;If&nbsp;not,&nbsp;missing&nbsp;marker&nbsp;projections&nbsp;are&nbsp;interpolated&nbsp;using&nbsp;global<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;homography,&nbsp;and&nbsp;all&nbsp;the&nbsp;marker&nbsp;corners&nbsp;in&nbsp;the&nbsp;board&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;Z&nbsp;coordinate.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CORNER_REFINE_APRILTAG</strong> = 3<br>
+<strong>CORNER_REFINE_CONTOUR</strong> = 2<br>
+<strong>CORNER_REFINE_NONE</strong> = 0<br>
+<strong>CORNER_REFINE_SUBPIX</strong> = 1<br>
+<strong>DICT_4X4_100</strong> = 1<br>
+<strong>DICT_4X4_1000</strong> = 3<br>
+<strong>DICT_4X4_250</strong> = 2<br>
+<strong>DICT_4X4_50</strong> = 0<br>
+<strong>DICT_5X5_100</strong> = 5<br>
+<strong>DICT_5X5_1000</strong> = 7<br>
+<strong>DICT_5X5_250</strong> = 6<br>
+<strong>DICT_5X5_50</strong> = 4<br>
+<strong>DICT_6X6_100</strong> = 9<br>
+<strong>DICT_6X6_1000</strong> = 11<br>
+<strong>DICT_6X6_250</strong> = 10<br>
+<strong>DICT_6X6_50</strong> = 8<br>
+<strong>DICT_7X7_100</strong> = 13<br>
+<strong>DICT_7X7_1000</strong> = 15<br>
+<strong>DICT_7X7_250</strong> = 14<br>
+<strong>DICT_7X7_50</strong> = 12<br>
+<strong>DICT_APRILTAG_16H5</strong> = 17<br>
+<strong>DICT_APRILTAG_16h5</strong> = 17<br>
+<strong>DICT_APRILTAG_25H9</strong> = 18<br>
+<strong>DICT_APRILTAG_25h9</strong> = 18<br>
+<strong>DICT_APRILTAG_36H10</strong> = 19<br>
+<strong>DICT_APRILTAG_36H11</strong> = 20<br>
+<strong>DICT_APRILTAG_36h10</strong> = 19<br>
+<strong>DICT_APRILTAG_36h11</strong> = 20<br>
+<strong>DICT_ARUCO_ORIGINAL</strong> = 16</td></tr></table>
+</body></html>
