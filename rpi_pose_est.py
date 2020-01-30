@@ -6,7 +6,7 @@ from picamera import PiCamera
 from imutils.video import FPS
 import cv2.aruco as aruco
 import numpy as np
-import time, math, cv2, imutils
+import time, math, cv2, imutils, os
 
 
 #--- define functions
@@ -39,9 +39,12 @@ def rotationMatrixToEulerAngles(R):
 #--- DEFINE
 x0, y0 = 38, 132
 
+
 #--- DEFINE Tag
-id_to_find  = 17
-marker_size  = 6 #- [cm]
+ids_to_find  = [17,2,6,4,5,1,0]
+marker_size  = 60 #- [cm]
+
+coord = np.zeros((len(ids_to_find), 4))
 
 #--- DEFINE the camera distortion arrays
 camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])
@@ -82,33 +85,36 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
     
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
+    
+    if ids is not None:
 
-    if ids is not None and ids[0] == id_to_find:
         ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
-        rvec, tvec = ret[0][0,0,:], ret[1][0,0,:]
+        rvec, tvec = ret[0], ret[1]
         
         aruco.drawDetectedMarkers(frame, corners)
-        aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 10)
         
-        #frame = cv2.undistort(frame, camera_matrix, camera_distortion)
-        
-        #-- Print the tag position in camera frame
-        str_position = "MARKER Position x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0]-x0, -(tvec[1]-y0), tvec[2])
-        cv2.putText(frame, str_position, (0, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-
-        #-- Obtain the rotation matrix tag->camera
-        R_ct = np.matrix(cv2.Rodrigues(rvec)[0])
-        R_tc = R_ct.T
-
-        #-- Get the attitude in terms of euler 321 (Needs to be flipped first)
-        roll_marker, pitch_marker, yaw_marker = rotationMatrixToEulerAngles(R_flip*R_tc)
-
-        #-- Print the marker's attitude respect to camera frame
-        str_attitude = "MARKER Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_marker),math.degrees(pitch_marker), math.degrees(yaw_marker))
-        cv2.putText(frame, str_attitude, (0, 150), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-    
+        i = 0
+        for id in ids_to_find:
+       
+            id_pos = np.where(ids==id)
+            coord[i][0] = id
+            try:
+                id_pos = int(id_pos[0])
+                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
+                coord[i][1] = tvec[id_pos][0][0]
+                coord[i][2] = tvec[id_pos][0][1]
+                coord[i][3] = tvec[id_pos][0][2]
+            except:
+                coord[i][1:] = None
+            i = i+1
+    else: 
+        coord[:][1:] = None
     # show the frame
     cv2.imshow("Frame", frame)
+    
+    os.system('clear')
+    print(coord)
+    
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
