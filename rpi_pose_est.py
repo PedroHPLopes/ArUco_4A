@@ -1,3 +1,5 @@
+# Credit: Tiziano Fiorenzani https://github.com/tizianofiorenzani/how_do_drones_work
+
 # import the necessary packages
 from picamera.array import PiRGBArray
 from picamera import PiCamera
@@ -65,8 +67,8 @@ font = cv2.FONT_HERSHEY_PLAIN
 #--- 180 deg rotation matrix around the x axis
 R_flip  = np.zeros((3,3), dtype=np.float32)
 R_flip[0,0] = 1.0
-R_flip[1,1] =-1.0
-R_flip[2,2] =-1.0
+R_flip[1,1] = -1.0
+R_flip[2,2] = -1.0
 
 #--- start imutils fps counter
 fps = FPS().start()
