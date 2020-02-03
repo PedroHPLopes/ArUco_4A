@@ -1,37 +1,27 @@
 """
 This demo calculates multiple things for different scenarios.
-
 Here are the defined reference frames:
-
 TAG:
                 A y
                 |
                 |
                 |tag center
                 O---------> x
-
 CAMERA:
-
-
                 X--------> x
                 | frame center
                 |
                 |
                 V y
-
 F1: Flipped (180 deg) tag frame around x axis
 F2: Flipped (180 deg) camera frame around x axis
-
 The attitude of a generic frame 2 respect to a frame 1 can obtained by calculating euler(R_21.T)
-
 We are going to obtain the following quantities:
     > from aruco library we obtain tvec and Rct, position of the tag in camera frame and attitude of the tag
     > position of the Camera in Tag axis: -R_ct.T*tvec
     > Transformation of the camera, respect to f1 (the tag flipped frame): R_cf1 = R_ct*R_tf1 = R_cf*R_f
     > Transformation of the tag, respect to f2 (the camera flipped frame): R_tf2 = Rtc*R_cf2 = R_tc*R_f
     > R_tf1 = R_cf2 an symmetric = R_f
-
-
 """
 
 import numpy as np
@@ -131,7 +121,7 @@ while True:
 
         #-- Draw the detected marker and put a reference frame over it
         aruco.drawDetectedMarkers(frame, corners)
-        aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 10)
+        #aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 10)
 
         #-- Print the tag position in camera frame
         str_position = "MARKER Position x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0], tvec[1], tvec[2])
@@ -176,34 +166,3 @@ while True:
         cap.release()
         cv2.destroyAllWindows()
         break
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
