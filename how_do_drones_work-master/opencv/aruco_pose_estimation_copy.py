@@ -11,14 +11,11 @@ TAG:
                 O---------> x
 
 CAMERA:
-
-
                 X--------> x
                 | frame center
                 |
                 |
                 V y
-
 F1: Flipped (180 deg) tag frame around x axis
 F2: Flipped (180 deg) camera frame around x axis
 
@@ -30,8 +27,6 @@ We are going to obtain the following quantities:
     > Transformation of the camera, respect to f1 (the tag flipped frame): R_cf1 = R_ct*R_tf1 = R_cf*R_f
     > Transformation of the tag, respect to f2 (the camera flipped frame): R_tf2 = Rtc*R_cf2 = R_tc*R_f
     > R_tf1 = R_cf2 an symmetric = R_f
-
-
 """
 
 import numpy as np
@@ -40,7 +35,7 @@ import cv2.aruco as aruco
 import sys, time, math
 
 #--- Define Tag
-id_to_find  = 17
+id_to_find  = 4
 marker_size  = 6 #- [cm]
 
 
@@ -116,27 +111,33 @@ while True:
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=gray, dictionary=aruco_dict, parameters=parameters,
                               cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-    
 
-    if ids is not None and ids[0] == id_to_find:
-        
+    if ids is not None and id_to_find in ids and 8 in ids:
+        a = np.where(ids == id_to_find)
+        a1 = np.where(ids == 8)
+        b = int(a[0])
+        c = int(a1[1])
+        print(b)
+        cor = corners[b and c][:,:]
+        print(cor)
         #-- ret = [rvec, tvec, ?]
         #-- array of rotation and position of each marker in camera frame
         #-- rvec = [[rvec_1], [rvec_2], ...]    attitude of the marker respect to camera frame
         #-- tvec = [[tvec_1], [tvec_2], ...]    position of the marker in camera frame
-        ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
-
+        ret = aruco.estimatePoseSingleMarkers(cor, marker_size, camera_matrix, camera_distortion)
+        #print(type(ret[1]))
+        #print(ret.shape)
         #-- Unpack the output, get only the first
         rvec, tvec = ret[0][0,0,:], ret[1][0,0,:]
-
         #-- Draw the detected marker and put a reference frame over it
+        print(len(rvec))
+        print(len(tvec))
         aruco.drawDetectedMarkers(frame, corners)
         aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 10)
 
         #-- Print the tag position in camera frame
         str_position = "MARKER Position x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0], tvec[1], tvec[2])
         cv2.putText(frame, str_position, (0, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-
         #-- Obtain the rotation matrix tag->camera
         R_ct    = np.matrix(cv2.Rodrigues(rvec)[0])
         R_tc    = R_ct.T
@@ -161,10 +162,6 @@ while True:
         str_attitude = "CAMERA Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_camera),math.degrees(pitch_camera),
                             math.degrees(yaw_camera))
         cv2.putText(frame, str_attitude, (0, 250), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-
-
-
-    
 
 
     #--- Display the frame
