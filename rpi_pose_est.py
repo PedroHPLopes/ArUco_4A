@@ -2,28 +2,12 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from imutils.video import FPS
-import numpy as np
-import time, math
-import cv2
 import cv2.aruco as aruco
-import imutils
+import numpy as np
+import time, math, cv2, imutils
+
 
 #--- define functions
-def draw_fps(fps):
-    # print fps
-    font                   = cv2.FONT_HERSHEY_SIMPLEX
-    bottomLeftCornerOfText = (470, 50)
-    fontScale              = 1
-    fontColor              = (255,255,255)
-    lineType               = 2
-
-    cv2.putText(gray,'FPS: ' + str(int(fps)), 
-    bottomLeftCornerOfText, 
-    font, 
-    fontScale,
-    fontColor,
-    lineType)
-
 #-- Checks if a matrix is a valid rotation matrix.
 def isRotationMatrix(R):
     Rt = np.transpose(R)
@@ -66,7 +50,7 @@ parameters =  aruco.DetectorParameters_create()
 #--- initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.rotation = 180
-camera.iso = 1600
+camera.iso = 1600 # max ISO to force exposure time to minimum to get less motion blur
 #camera.exposure_mode = "sports"
 #camera.resolution = (1280, 720)
 camera.resolution = (640, 480) 
@@ -89,7 +73,6 @@ fps = FPS().start()
 
 #--- LOOP - capture frames from the camera
 for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-    
     frame = frame_pi.array
     #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
@@ -108,30 +91,15 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
         cv2.putText(frame, str_position, (0, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
         #-- Obtain the rotation matrix tag->camera
-        R_ct    = np.matrix(cv2.Rodrigues(rvec)[0])
-        R_tc    = R_ct.T
+        R_ct = np.matrix(cv2.Rodrigues(rvec)[0])
+        R_tc = R_ct.T
 
         #-- Get the attitude in terms of euler 321 (Needs to be flipped first)
         roll_marker, pitch_marker, yaw_marker = rotationMatrixToEulerAngles(R_flip*R_tc)
 
         #-- Print the marker's attitude respect to camera frame
-        str_attitude = "MARKER Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_marker),math.degrees(pitch_marker),
-                            math.degrees(yaw_marker))
+        str_attitude = "MARKER Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_marker),math.degrees(pitch_marker), math.degrees(yaw_marker))
         cv2.putText(frame, str_attitude, (0, 150), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-
-        #-- Now get Position and attitude f the camera respect to the marker
-        pos_camera = -R_tc*np.matrix(tvec).T
-
-        str_position = "CAMERA Position x=%4.0f  y=%4.0f  z=%4.0f"%(pos_camera[0], pos_camera[1], pos_camera[2])
-        cv2.putText(frame, str_position, (0, 200), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-
-        #-- Get the attitude of the camera respect to the frame
-        roll_camera, pitch_camera, yaw_camera = rotationMatrixToEulerAngles(R_flip*R_tc)
-        str_attitude = "CAMERA Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_camera),math.degrees(pitch_camera),
-                            math.degrees(yaw_camera))
-        cv2.putText(frame, str_attitude, (0, 250), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-    
- 
     
     # show the frame
     cv2.imshow("Frame", frame)
@@ -139,11 +107,12 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
 
+    fps.update()
+
     # if the `q` key was pressed, break from the loop
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     
-    fps.update()
 
 # stop the timer and display FPS information
 fps.stop()
