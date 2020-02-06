@@ -36,10 +36,12 @@ def rotationMatrixToEulerAngles(R):
         z = 0
 
     return np.array([x, y, z])
+#--- DEFINE
+x0, y0 = 38, 132
 
 #--- DEFINE Tag
 id_to_find  = 17
-marker_size  = 60 #- [cm]
+marker_size  = 6 #- [cm]
 
 #--- DEFINE the camera distortion arrays
 camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])
@@ -91,7 +93,7 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
         #frame = cv2.undistort(frame, camera_matrix, camera_distortion)
         
         #-- Print the tag position in camera frame
-        str_position = "MARKER Position x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0]-38, -(tvec[1]-132), tvec[2])
+        str_position = "MARKER Position x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0]-x0, -(tvec[1]-y0), tvec[2])
         cv2.putText(frame, str_position, (0, 100), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
         #-- Obtain the rotation matrix tag->camera
