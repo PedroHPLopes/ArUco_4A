@@ -6,7 +6,7 @@ from picamera import PiCamera
 from imutils.video import FPS
 import cv2.aruco as aruco
 import numpy as np
-import time, math, cv2, imutils, os
+import time, math, cv2, pickle, os
 
 
 #--- define functions
@@ -41,10 +41,11 @@ x0, y0 = 38, 132
 
 
 #--- DEFINE Tag
-ids_to_find  = [2, 6, 17]
+ids_to_find  = [2, 4, 6, 17]
 marker_size  = 60 #- [cm]
 
-coord = np.zeros((len(ids_to_find), 4))
+coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 
 #--- DEFINE the camera distortion arrays
 camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])
@@ -98,23 +99,39 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
        
             id_pos = np.where(ids==id)
             coord[i][0] = id
+            
             try:
                 id_pos = int(id_pos[0])
                 aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
                 coord[i][1] = tvec[id_pos][0][0]
                 coord[i][2] = tvec[id_pos][0][1]
                 coord[i][3] = tvec[id_pos][0][2]
+                
+                """
+                R_ct = np.matrix(cv2.Rodrigues(rvec[id_pos][0]))
+                R_tc = R_ct.T
+
+                #-- Get the attitude in terms of euler 321 (Needs to be flipped first)
+                coord[i][4:]= rotationMatrixToEulerAngles(R_flip*R_tc)
+                """
+                
             except:
-                coord[i][1:] = None
+                coord[i][1:] = old_coord[i][1:]
+            
+            
             i = i+1
     else: 
-        coord[:][1:] = None
+        coord[:][1:] = old_coord[:][1:]
+    
+    old_coord = coord
+    
     # show the frame
     cv2.imshow("Frame", frame)
     
     os.system('clear')
     print(coord)
     
+    coord_dump = pickle.dumps(coord)
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
