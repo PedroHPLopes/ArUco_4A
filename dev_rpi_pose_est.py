@@ -37,19 +37,24 @@ def rotationMatrixToEulerAngles(R):
 
     return np.array([x, y, z])
 #--- DEFINE
-x0, y0 = 38, 132
+x0, y0 = -223, 32
 
 
 #--- DEFINE Tag
-ids_to_find  = [2, 4, 6, 17]
-marker_size  = 60 #- [cm]
+#ids_to_find  = [2, 4, 6, 17]
+ids_to_find  = [2, 17]
+marker_size  = 14 #- [cm]
 
 coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 
 #--- DEFINE the camera distortion arrays
-camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])
-camera_distortion = np.array([-0.32061628, 0.13711123, 0.0058947, 0.00258218, -0.03117783])
+#camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])*2
+#camera_distortion = np.array([-0.32061628, 0.13711123, 0.0058947, 0.00258218, -0.03117783])
+
+camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])
+camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545, -0.01286428]])
+
 
 #--- DEFINE dictionary
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
@@ -61,8 +66,8 @@ camera.rotation = 180
 camera.iso = 1600 # max ISO to force exposure time to minimum to get less motion blur
 #camera.exposure_mode = "sports"
 #camera.resolution = (1280, 720)
-camera.resolution = (640, 480) 
-#camera.resolution = (1640, 1232)
+#camera.resolution = (640, 480) 
+camera.resolution = (1280, 960)
 camera.framerate = 30
 rawCapture = PiRGBArray(camera, size=camera.resolution)
 
@@ -103,8 +108,8 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
             try:
                 id_pos = int(id_pos[0])
                 aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
-                coord[i][1] = tvec[id_pos][0][0]
-                coord[i][2] = tvec[id_pos][0][1]
+                coord[i][1] = tvec[id_pos][0][0] - x0
+                coord[i][2] = tvec[id_pos][0][1] - y0
                 coord[i][3] = tvec[id_pos][0][2]
                 
                 """
@@ -126,6 +131,7 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
     old_coord = coord
     
     # show the frame
+    #frame = cv2.undistort(frame, camera_matrix, camera_distortion)
     cv2.imshow("Frame", frame)
     
     os.system('clear')

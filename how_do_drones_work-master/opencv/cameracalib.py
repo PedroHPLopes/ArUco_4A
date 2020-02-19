@@ -96,18 +96,20 @@ else:
             cv2.drawChessboardCorners(img, (nCols,nRows), corners2,ret)
             cv2.imshow('img',img)
             # cv2.waitKey(0)
+            """
             k = cv2.waitKey(0) & 0xFF
             if k == 27: #-- ESC Button
                 print("Image Skipped")
                 imgNotGood = fname
                 continue
-
+            """
+            
             print("Image accepted")
             nPatternFound += 1
             objpoints.append(objp)
             imgpoints.append(corners2)
 
-            # cv2.waitKey(0)
+            cv2.waitKey(1)
         else:
             imgNotGood = fname
 
