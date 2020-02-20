@@ -15,10 +15,10 @@ camera_distortion = np.array([-0.32061628, 0.13711123, 0.0058947, 0.00258218, -0
 #--- initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.rotation = 180
-camera.iso = 1600 # max ISO to force exposure time to minimum to get less motion blur
+camera.iso = 400 # max ISO to force exposure time to minimum to get less motion blur
 #camera.exposure_mode = "sports"
 #camera.resolution = (1280, 720)
-camera.resolution = (640, 480) 
+camera.resolution = (1920, 1080) 
 #camera.resolution = (1640, 922)
 camera.framerate = 30
 rawCapture = PiRGBArray(camera, size=camera.resolution)
