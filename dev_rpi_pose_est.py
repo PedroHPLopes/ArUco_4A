@@ -37,22 +37,22 @@ def rotationMatrixToEulerAngles(R):
 
     return np.array([x, y, z])
 #--- DEFINE
-x0, y0 = -223, 32
+x0, y0 = -222, -38
 
 
 #--- DEFINE Tag
 #ids_to_find  = [2, 4, 6, 17]
-ids_to_find  = [2, 17]
-marker_size  = 14 #- [cm]
+ids_to_find  = [2, 17, 42]
+marker_size  = 14 #- [mm]
 
 coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 
 #--- DEFINE the camera distortion arrays
-#camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])*2
+#camera_matrix = np.array([[309.65140551, 0, 299.7942552], [0, 309.63299386, 236.80161718], [ 0, 0, 1]])
 #camera_distortion = np.array([-0.32061628, 0.13711123, 0.0058947, 0.00258218, -0.03117783])
 
-camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])
+camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])#*0.5
 camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545, -0.01286428]])
 
 
@@ -108,10 +108,13 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
             try:
                 id_pos = int(id_pos[0])
                 aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
-                coord[i][1] = tvec[id_pos][0][0] - x0
-                coord[i][2] = tvec[id_pos][0][1] - y0
+                coord[i][1] = (tvec[id_pos][0][0] - x0)
+                coord[i][2] = (-tvec[id_pos][0][1] - y0)
                 coord[i][3] = tvec[id_pos][0][2]
                 
+                coord[i][1] = coord[i][1]# - coord[i][1]*(19/400)
+                coord[i][2] = coord[i][2]# - coord[i][2]*(-23/200)
+
                 """
                 R_ct = np.matrix(cv2.Rodrigues(rvec[id_pos][0]))
                 R_tc = R_ct.T
