@@ -1,5 +1,5 @@
 # Credit: Tiziano Fiorenzani https://github.com/tizianofiorenzani/how_do_drones_work
-https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
+#https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
 
 # import the necessary packages
 from picamera.array import PiRGBArray
