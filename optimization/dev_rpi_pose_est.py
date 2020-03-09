@@ -1,5 +1,5 @@
 # Credit: Tiziano Fiorenzani https://github.com/tizianofiorenzani/how_do_drones_work
-#https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
+# https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
 
 # import the necessary packages
 from picamera.array import PiRGBArray
@@ -11,20 +11,20 @@ import numpy as np
 import time, math, cv2, pickle, os
 
 class PiVideoStream:
-	def __init__(self, resolution=(1280, 960), framerate=30, iso=400, rotation=180):
-		# initialize the camera and stream
-		self.camera = PiCamera()
-		self.camera.resolution = resolution
-		self.camera.framerate = framerate
+    def __init__(self, resolution=(1280, 960), framerate=30, iso=400, rotation=0):
+        # initialize the camera and stream
+        self.camera = PiCamera()
+        self.camera.resolution = resolution
+        self.camera.framerate = framerate
         self.camera.rotation = rotation
         self.camera.iso = iso
         #self.camera.exposure_mode = "sports"
-		self.rawCapture = PiRGBArray(self.camera, size=resolution)
-		self.stream = self.camera.capture_continuous(self.rawCapture, format="bgr", use_video_port=True)
-		# initialize the frame and the variable used to indicate
-		# if the thread should be stopped
-		self.frame = None
-		self.stopped = False
+        self.rawCapture = PiRGBArray(self.camera, size=resolution)
+        self.stream = self.camera.capture_continuous(self.rawCapture, format="bgr", use_video_port=True)
+        # initialize the frame and the variable used to indicate
+        # if the thread should be stopped
+        self.frame = None
+        self.stopped = False
 
     def start(self):
         # start the thread to read frames from the video stream
@@ -81,9 +81,15 @@ def rotationMatrixToEulerAngles(R):
         z = 0
 
     return np.array([x, y, z])
+#--- DEFINE Tag
+ids_to_find  = [2, 17]
+id_z = [60, 0]
+id0 = 42
+marker_size  = 14 #- [mm]
+calib_marker_size = 20 #- [mm]
 
 #--- DEFINE
-x0, y0 = -222, -45
+x0, y0 = 0, 0
 coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 font = cv2.FONT_HERSHEY_PLAIN
@@ -92,10 +98,6 @@ R_flip  = np.zeros((3,3), dtype=np.float32)
 R_flip[0,0] = 1.0
 R_flip[1,1] = -1.0
 R_flip[2,2] = -1.0
-
-#--- DEFINE Tag
-ids_to_find  = [2, 17, 42]
-marker_size  = 14 #- [mm]
 
 #--- DEFINE the camera distortion arrays
 camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])#*0.5
@@ -110,13 +112,49 @@ parameters =  aruco.DetectorParameters_create()
 print("[INFO] sampling THREADED frames from `picamera` module...")
 stream = PiVideoStream().start()
 time.sleep(2.0)
+
+#--- CALIBRATION LOOP - Find the central tag and set x0 and y0
+for i in range(0, 50):
+    frame = stream.read()
+    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    
+    #-- Find all the aruco markers in the image
+    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
+    
+    if ids is not None:
+        ret = aruco.estimatePoseSingleMarkers(corners, calib_marker_size, camera_matrix, camera_distortion)
+        rvec, tvec = ret[0], ret[1]
+        
+        aruco.drawDetectedMarkers(frame, corners)
+        
+        try:
+            central_id_pos = np.where(ids==id0)
+            central_id_pos = int(central_id_pos[0])
+
+            aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[central_id_pos][0], tvec[central_id_pos][0], 50)
+            x0 = tvec[central_id_pos][0][0] - 300
+            y0 = tvec[central_id_pos][0][1] - 260
+        
+        except:
+            continue
+            
+    else: 
+        continue
+    
+    # show the frame
+    cv2.imshow("Frame", frame)
+
+    # if the `q` key was pressed, break from the loop
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
 #--- start imutils fps counter
 fps = FPS().start()
 
-#--- LOOP - capture frames from the camera
-for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+#--- LOOP - Send coordinates to clients
+while True:
     frame = stream.read()
-    #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
@@ -135,8 +173,11 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
             try:
                 id_pos = int(id_pos[0])
                 aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
-                coord[i][1] = (tvec[id_pos][0][0] - x0)
-                coord[i][2] = (-tvec[id_pos][0][1] - y0)
+                coord[i][1] = tvec[id_pos][0][0] - x0
+                coord[i][2] = tvec[id_pos][0][1] - y0
+                
+                coord[i][2] = coord[i][2] - ((id_z[i]*coord[i][2])/200)
+                
                 coord[i][3] = tvec[id_pos][0][2]
                 
             except:
@@ -149,7 +190,7 @@ for frame_pi in camera.capture_continuous(rawCapture, format="bgr", use_video_po
     old_coord = coord
     
     # show the frame
-    #frame = cv2.undistort(frame, camera_matrix, camera_distortion)
+    # frame = cv2.undistort(frame, camera_matrix, camera_distortion)
     cv2.imshow("Frame", frame)
     
     os.system('clear')
