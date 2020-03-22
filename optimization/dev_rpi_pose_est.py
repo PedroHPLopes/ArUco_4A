@@ -81,6 +81,13 @@ def rotationMatrixToEulerAngles(R):
         z = 0
 
     return np.array([x, y, z])
+
+def x_error(x):
+    return 0
+
+def y_error(y):
+    return 0
+
 #--- DEFINE Tag
 ids_to_find  = [2, 17]
 id_z = [60, 0]
@@ -89,7 +96,7 @@ marker_size  = 14 #- [mm]
 calib_marker_size = 20 #- [mm]
 
 #--- DEFINE
-x0, y0 = 0, 0
+x0_list, y0_list = list(), list()
 coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
 font = cv2.FONT_HERSHEY_PLAIN
@@ -132,8 +139,8 @@ for i in range(0, 50):
             central_id_pos = int(central_id_pos[0])
 
             aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[central_id_pos][0], tvec[central_id_pos][0], 50)
-            x0 = tvec[central_id_pos][0][0] - 300
-            y0 = tvec[central_id_pos][0][1] - 260
+            x0_list.append(tvec[central_id_pos][0][0] - 300)
+            y0_list.append(tvec[central_id_pos][0][1] - 260)
         
         except:
             continue
@@ -147,6 +154,10 @@ for i in range(0, 50):
     # if the `q` key was pressed, break from the loop
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    
+#--- find mean of x0 and y0
+x0 = sum(x0_list)/len(x0_list)
+y0 = sum(y0_list)/len(y0_list)
 
 #--- start imutils fps counter
 fps = FPS().start()
@@ -154,7 +165,7 @@ fps = FPS().start()
 #--- LOOP - Send coordinates to clients
 while True:
     frame = stream.read()
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
@@ -176,9 +187,11 @@ while True:
                 coord[i][1] = tvec[id_pos][0][0] - x0
                 coord[i][2] = tvec[id_pos][0][1] - y0
                 
-                coord[i][2] = coord[i][2] - ((id_z[i]*coord[i][2])/200)
-                
                 coord[i][3] = tvec[id_pos][0][2]
+                
+                #error correction
+                coord[i][1] -= x_error(coord[i][1])
+                coord[i][2] -= y_error(coord[i][2])
                 
             except:
                 coord[i][1:] = old_coord[i][1:]
@@ -203,7 +216,7 @@ while True:
     # if the `q` key was pressed, break from the loop
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
+    
 # stop the timer and display FPS information
 fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))

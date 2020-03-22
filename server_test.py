@@ -3,7 +3,7 @@ import socket, pickle, os, time, subprocess
 
 
 myIP = subprocess.check_output('hostname -I', shell=True).decode('utf-8')
-myIP = myIP[:-2]
+myIP = myIP.split(" ")[0]
 
 
 print("[INFO] Server IP", myIP)
