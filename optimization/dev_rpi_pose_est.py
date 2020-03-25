@@ -67,7 +67,7 @@ def isRotationMatrix(R):
 def rotationMatrixToEulerAngles(R):
     assert (isRotationMatrix(R))
 
-    sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
+    sy = math.sqrt(R[0, 0]* R[0, 0] + R[1, 0]* R[1, 0])
 
     singular = sy < 1e-6
 
@@ -82,11 +82,15 @@ def rotationMatrixToEulerAngles(R):
 
     return np.array([x, y, z])
 
-def x_error(x):
-    return 0
+def x_error(x, y):
+    e = 3.397 + 15.59*x - 7.68*y - 15.85*(x**2) + 9.723*x*y + 2.465*(y**2) - 0.9748*(x**3) + 3.756*(x**2)*y
+    - 1.769*x*(y**2) - 0.7737*(y**3) + 4.586*(x**4) - 1.998*(x**3)*y + 4.426*(x**2)*(y**2) - 0.3925*x*(y**3) - 3.33*(y**4)
+    return e
 
-def y_error(y):
-    return 0
+def y_error(x, y):
+    e = 15.82 - 3.498*x - 22.18*y + 6.067*(x**2) + 9.23*x*y + 8.06*(y**2) + 1.857*(x**3) + 6.654*(x**2)*y
+    + 3.56*x*(y**2) + 1.969*(y**3) - 2.466*(x**4) - 4.13*(x**3)*y - 2.797*(x**2)*(y**2) - 3.051*x*(y**3) - 1.312*(y**4)
+    return e
 
 #--- DEFINE Tag
 ids_to_find  = [2, 17]
@@ -114,7 +118,7 @@ camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
 parameters =  aruco.DetectorParameters_create()
 
-# created a *threaded *video stream, allow the camera sensor to warmup,
+# created a*threaded*video stream, allow the camera sensor to warmup,
 # and start the FPS counter
 print("[INFO] sampling THREADED frames from `picamera` module...")
 stream = PiVideoStream().start()
@@ -190,8 +194,8 @@ while True:
                 coord[i][3] = tvec[id_pos][0][2]
                 
                 #error correction
-                coord[i][1] -= x_error(coord[i][1])
-                coord[i][2] -= y_error(coord[i][2])
+                #coord[i][1] -= x_error(coord[i][1])
+                #coord[i][2] -= y_error(coord[i][2])
                 
             except:
                 coord[i][1:] = old_coord[i][1:]
