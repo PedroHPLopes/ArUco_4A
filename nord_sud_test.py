@@ -6,11 +6,11 @@ sleep_time = 2
 serial_port = "/dev/ttyS0"
 
 def send_north():
-    ser.write("1")
+    ser.write(1)
     print("Sent North ")
 
 def send_south():
-    ser.write("0")
+    ser.write(0)
     print("Sent South")
 
 seed(1)
