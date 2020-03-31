@@ -13,7 +13,8 @@ from imutils.video import FPS
 from threading import Thread
 import cv2.aruco as aruco
 import numpy as np
-import time, math, cv2, pickle, os
+import time, math, cv2, pickle, os, serial
+import RPi.GPIO as GPIO
 
 class PiVideoStream:
     def __init__(self, resolution=(1280, 960), framerate=30, iso=1600, rotation=0):
@@ -87,6 +88,11 @@ def rotationMatrixToEulerAngles(R):
         z = 0
 
     return np.array([x, y, z])
+    
+#-- Callback for the interrupt
+def start_interrupt:
+    global START_FLAG
+    START_FLAG = 1
 
 #--- DEFINE parameters
 threshold = 20 #- [deg/s]
@@ -96,10 +102,13 @@ marker_size  = 60 #- [mm]
 #--- DEFINE
 font = cv2.FONT_HERSHEY_PLAIN
 coord = np.zeros(4, dtype = np.int16)
+
 omega_tab = np.full(4, 1000, dtype = np.float)
 old_time = time.time()
 old_yaw_marker = 0
+
 START_FLAG = 1
+INTERRUPT_PIN = 0
 #-- 180 deg rotation matrix around the x axis
 R_flip  = np.zeros((3,3), dtype=np.float32)
 R_flip[0,0] = 1.0
@@ -109,6 +118,12 @@ R_flip[2,2] = -1.0
 #--- DEFINE the camera distortion arrays
 camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])#*0.5
 camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545, -0.01286428]])
+
+#--- GPIO setup
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(INTERRUPT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING, callback=start_interrupt, bouncetime=200)
 
 #--- DEFINE dictionary
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
