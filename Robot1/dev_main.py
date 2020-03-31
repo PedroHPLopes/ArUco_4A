@@ -2,7 +2,7 @@
 #   Tiziano Fiorenzani https://github.com/tizianofiorenzani/how_do_drones_work
 #   https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
 
-# This script waits for the start of the match (pin interupt to start) 
+# This script waits for the start of the match (pin interrupt to start) 
 # searches for the tag No17 (60mm in size), calculates its angle (yaw axis), 
 # waits until the tag stops rotating and then transmits the data over UART and the network. 
 
@@ -16,7 +16,7 @@ import numpy as np
 import time, math, cv2, pickle, os
 
 class PiVideoStream:
-    def __init__(self, resolution=(1280, 960), framerate=30, iso=400, rotation=0):
+    def __init__(self, resolution=(1280, 960), framerate=30, iso=1600, rotation=0):
         # initialize the camera and stream
         self.camera = PiCamera()
         self.camera.resolution = resolution
@@ -88,13 +88,18 @@ def rotationMatrixToEulerAngles(R):
 
     return np.array([x, y, z])
 
-#--- DEFINE Tag
+#--- DEFINE parameters
+threshold = 20 #- [deg/s]
 id = 17
 marker_size  = 60 #- [mm]
 
 #--- DEFINE
 font = cv2.FONT_HERSHEY_PLAIN
-coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+coord = np.zeros(4, dtype = np.int16)
+omega_tab = np.full(4, 1000, dtype = np.float)
+old_time = time.time()
+old_yaw_marker = 0
+START_FLAG = 1
 #-- 180 deg rotation matrix around the x axis
 R_flip  = np.zeros((3,3), dtype=np.float32)
 R_flip[0,0] = 1.0
@@ -109,14 +114,17 @@ camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
 parameters =  aruco.DetectorParameters_create()
 
-#--- waiting for the match to start
-
 # created a*threaded*video stream, allow the camera sensor to warmup,
 # and start the FPS counter
 print("[INFO] sampling THREADED frames from `picamera` module...")
 stream = PiVideoStream().start()
-time.sleep(2.0)
 
+
+#--- waiting for the match to start
+time.sleep(2) #-- sleep at least for 2 seconds to let the sensor warm-up 
+while START_FLAG==0:
+    time.sleep(0.1) #-- sleep to save 
+    
 #--- start imutils fps counter
 fps = FPS().start()
 
@@ -132,8 +140,9 @@ while True:
         
         #-- Check if the id has been found
         try:
-            id_pos = int(np.where(ids=id)[0])
+            id_pos = int(np.where(ids==id)[0])
         except:
+            #print("PASS!")
             continue
         
         #-- If the id was found we estimate the position
@@ -143,13 +152,34 @@ while True:
         aruco.drawDetectedMarkers(frame, corners)
         aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
 
-        coord[i][1] = tvec[id_pos][0][0]
-        coord[i][2] = tvec[id_pos][0][1]
-        coord[i][3] = tvec[id_pos][0][2]
+        #-- Obtain the rotation matrix tag->camera
+        R_ct    = np.matrix(cv2.Rodrigues(rvec[id_pos])[0])
+        R_tc    = R_ct.T
 
-        print(coord)
+        #-- Get the attitude in terms of euler 321 (Needs to be flipped first)
+        roll_marker, pitch_marker, yaw_marker = rotationMatrixToEulerAngles(R_flip*R_tc)
+        
+        
+        yaw_marker = math.degrees(yaw_marker+math.pi/2)
+        if yaw_marker < 0: yaw_marker += 360 
+        
+        omega = abs((old_yaw_marker-yaw_marker)/(old_time-time.time()))
+        omega_tab = np.roll(omega_tab, -1)
+        omega_tab[-1] = omega
 
-        cv2.imshow("Frame", frame)
+        print("omega =", omega_tab)
+        
+        
+        if omega_tab.mean() < threshold:
+            if abs(yaw_marker-90)<abs(yaw_marker-270): print("NORTH!")
+            else: print("SOUTH!")
+            break
+        
+           
+        old_yaw_marker = yaw_marker
+        old_time = time.time(); 
+
+        #cv2.imshow("Frame", frame)
         
     fps.update()
 
