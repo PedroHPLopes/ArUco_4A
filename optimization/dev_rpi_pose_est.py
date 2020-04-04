@@ -90,88 +90,46 @@ def y_error(x, y):
     e = -2.049 + 0.5232*x + 0.3714*y -0.001815*x**2 -0.003032*x*y -0.00222*y**2 + 2.657e-06*x**3 + 5.546e-06*x**2*y + 5.885e-06*x*y**2 + 4.67e-06*y**3 -1.455e-09*x**4 -3.444e-09*x**3*y -3.299e-09*x**2*y**2  -5.089e-09*x*y**3  -3.095e-09*y**4
     return e
 
-#--- DEFINE Tag
-ids_to_find  = [2, 17]
-id_z = [60, 0]
-id0 = 42
-marker_size  = 14 #- [mm]
-calib_marker_size = 20 #- [mm]
+def calibrate():
+    x0_list, y0_list = list(), list()
 
-#--- DEFINE
-x0_list, y0_list = list(), list()
-coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
-old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
-font = cv2.FONT_HERSHEY_PLAIN
-#--- 180 deg rotation matrix around the x axis
-R_flip  = np.zeros((3,3), dtype=np.float32)
-R_flip[0,0] = 1.0
-R_flip[1,1] = -1.0
-R_flip[2,2] = -1.0
-
-#--- DEFINE the camera distortion arrays
-camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])#*0.5
-camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545, -0.01286428]])
-
-#--- DEFINE dictionary
-aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
-parameters =  aruco.DetectorParameters_create()
-
-# created a*threaded*video stream, allow the camera sensor to warmup,
-# and start the FPS counter
-print("[INFO] sampling THREADED frames from `picamera` module...")
-stream = PiVideoStream().start()
-time.sleep(2.0)
-
-#--- CALIBRATION LOOP - Find the central tag and set x0 and y0
-for i in range(0, 50):
-    frame = stream.read()
-    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
-    #-- Find all the aruco markers in the image
-    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-    
-    if ids is not None:
-        ret = aruco.estimatePoseSingleMarkers(corners, calib_marker_size, camera_matrix, camera_distortion)
-        rvec, tvec = ret[0], ret[1]
+    for i in range(0, 50):
+        frame = stream.read()
+        #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
-        aruco.drawDetectedMarkers(frame, corners)
+        #-- Find all the aruco markers in the image
+        corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
         
-        try:
-            central_id_pos = np.where(ids==id0)
-            central_id_pos = int(central_id_pos[0])
-
-            aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[central_id_pos][0], tvec[central_id_pos][0], 50)
-            x0_list.append(tvec[central_id_pos][0][0] - 300)
-            y0_list.append(tvec[central_id_pos][0][1] - 260)
-        
-        except:
-            continue
+        if ids is not None:
+            ret = aruco.estimatePoseSingleMarkers(corners, calib_marker_size, camera_matrix, camera_distortion)
+            rvec, tvec = ret[0], ret[1]
             
-    else: 
-        continue
-    
-    # show the frame
-    cv2.imshow("Frame", frame)
+            aruco.drawDetectedMarkers(frame, corners)
+            
+            try:
+                central_id_pos = np.where(ids==id0)
+                central_id_pos = int(central_id_pos[0])
 
-    # if the `q` key was pressed, break from the loop
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-    
-#--- find mean of x0 and y0
-x0 = sum(x0_list)/len(x0_list)
-y0 = sum(y0_list)/len(y0_list)
+                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[central_id_pos][0], tvec[central_id_pos][0], 50)
+                x0_list.append(tvec[central_id_pos][0][0] - 300)
+                y0_list.append(tvec[central_id_pos][0][1] - 260)
+            except:
+                continue 
+        else: 
+            continue
+        
+        # show the frame
+        cv2.imshow("Frame", frame)
 
-#--- start imutils fps counter
-fps = FPS().start()
+        # if the `q` key was pressed, break from the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-#--- LOOP - Send coordinates to clients
-while True:
-    frame = stream.read()
-    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
-    #-- Find all the aruco markers in the image
-    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-    
+    return sum(x0_list)/len(x0_list), sum(y0_list)/len(y0_list) #- return mean of x0 and y0 
+
+def get_coord(frame, old_coord, corners, market_size, camera_matrix, camera_distortion):
+    coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+
     if ids is not None:
         ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
         rvec, tvec = ret[0], ret[1]
@@ -204,7 +162,54 @@ while True:
             i = i+1
     else: 
         coord[:][1:] = old_coord[:][1:]
+
+    return coord
+
+#--- DEFINE Tag
+ids_to_find  = [2, 17]
+id_z = [60, 0]
+id0 = 42
+marker_size  = 14 #- [mm]
+calib_marker_size = 20 #- [mm]
+
+#--- DEFINE
+coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+old_coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+font = cv2.FONT_HERSHEY_PLAIN
+#--- 180 deg rotation matrix around the x axis
+R_flip  = np.zeros((3,3), dtype=np.float32)
+R_flip[0,0] = 1.0
+R_flip[1,1] = -1.0
+R_flip[2,2] = -1.0
+
+#--- DEFINE the camera distortion arrays
+camera_matrix = np.array([[613.80715183, 0, 671.24584852], [0, 614.33915691, 494.57901986], [0, 0, 1]])#*0.5
+camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545, -0.01286428]])
+
+#--- DEFINE dictionary
+aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
+parameters =  aruco.DetectorParameters_create()
+
+# created a*threaded*video stream, allow the camera sensor to warmup,
+# and start the FPS counter
+print("[INFO] sampling THREADED frames from `picamera` module...")
+stream = PiVideoStream().start()
+time.sleep(2.0)
+
+#--- CALIBRATION - Find the central tag and set x0 and y0
+x0, y0 = calibrate()
+
+#--- start imutils fps counter
+fps = FPS().start()
+
+#--- LOOP - Send coordinates to clients
+while True:
+    frame = stream.read()
+    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
+    #-- Find all the aruco markers in the image
+    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
+    coord = get_coord(frame, old_coord, corners, marker_size, camera_matrix, camera_distortion)
     old_coord = coord
     
     # show the frame
