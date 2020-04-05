@@ -81,48 +81,26 @@ def rotationMatrixToEulerAngles(R):
         z = 0
 
     return np.array([x, y, z])
+    
+def get_coord(tag_id, ret, ids):
+    
 
 def calibrate(calib_frames):
-    i = 0
-    rvec_mtx = np.empty((1, 1, 3), dtype=np.float32)
-    tvec_mtx = np.empty((1, 1, 3), dtype=np.float32)
-    while (i<calib_frames):
-        frame = stream.read()
+    frame = stream.read()
         #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
-        corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-        
-        if ids is not None:
-            ret = aruco.estimatePoseSingleMarkers(corners, calib_size, camera_matrix, camera_distortion)
-            rvec, tvec = ret[0], ret[1]
+    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
+    
+    ret = aruco.estimatePoseSingleMarkers(corners, calib_size, camera_matrix, camera_distortion)
+    rvec, tvec = ret[0], ret[1]
             
-            aruco.drawDetectedMarkers(frame, corners)
+    #aruco.drawDetectedMarkers(frame, corners)
             
-            try:
-                calib_pos = np.where(ids==id0)
-                calib_pos = int(calib_pos[0])
-
-                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[calib_pos][0], tvec[calib_pos][0], 50)
-                rvec_mtx = np.append(rvec_mtx, rvec[calib_pos], axis=0)
-                tvec_mtx = np.append(tvec_mtx, rvec[calib_pos], axis=0)
-                
-                i += 1
-            except:
-                continue 
-        
-        # show the frame
-        cv2.imshow("Frame", frame)
-
-        # if the `q` key was pressed, break from the loop
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    rvec_avg = np.average(rvec_mtx, axis=0)
-    tvec_avg = np.average(tvec_mtx, axis=0)
+    #aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 50)
 
     M_calib = basis_change_mtx(rvec, tvec)
 
-    return M_calib #- return mean of x0 and y0 
+    return M_calib 
 
 def basis_change_mtx(rvec, tvec):
     M = np.zeros((4, 4), dtype=np.float32)
@@ -147,21 +125,18 @@ def get_coord(M_calib, frame, old_coord, corners, market_size, camera_matrix, ca
             id_pos = np.where(ids==id)
             coord[i][0] = id
             
-            try:
-                id_pos = int(id_pos[0])
-                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos], tvec[id_pos], 50)
-                
-                M_i = basis_change_mtx(rvec[id_pos], tvec[id_pos])
-                inv_M_calib = np.linalg.inv(M_calib)
-                M_t = np.dot(M_i, inv_M_calib)
-                new_tvec = np.ones((4, 1))
-                new_tvec[:3, 0]
-                posvec = np.dot(M_t, new_tvec)
-                
-                coord[i, 1:4] = posvec
-                
-            except:
-                coord[i][1:] = old_coord[i][1:]
+            
+            id_pos = int(id_pos[0])
+            aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos], tvec[id_pos], 50)
+            
+            M_i = basis_change_mtx(rvec[id_pos], tvec[id_pos])
+            inv_M_calib = np.linalg.inv(M_calib)
+            M_t = np.dot(M_i, inv_M_calib)
+            new_tvec = np.ones((4, 1))
+            new_tvec[:3, 0]
+            posvec = np.dot(M_t, new_tvec)
+            
+            coord[i, 1:4] = posvec
             
             i = i+1
     else: 
@@ -203,6 +178,8 @@ time.sleep(2.0)
 #--- CALIBRATION - Find the central tag and set x0 and y0
 M_calib = calibrate(50)
 
+print("done calib...")
+time.sleep(5)
 #--- start imutils fps counter
 fps = FPS().start()
 
@@ -213,7 +190,39 @@ while True:
     
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-    coord = get_coord(M_calib, frame, old_coord, corners, marker_size, camera_matrix, camera_distortion)
+    #coord = get_coord(M_calib, frame, old_coord, corners, marker_size, camera_matrix, camera_distortion)
+    
+    coord = np.zeros((len(ids_to_find), 7), dtype = np.int16)
+
+    if ids is not None:
+        ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
+        rvec, tvec = ret[0], ret[1]
+        
+        aruco.drawDetectedMarkers(frame, corners)
+        
+        i = 0
+        for id in ids_to_find:
+            id_pos = np.where(ids==id)
+            coord[i][0] = id
+            
+            
+            id_pos = 1
+            aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos], tvec[id_pos], 50)
+            
+            M_i = basis_change_mtx(rvec[id_pos], tvec[id_pos])
+            inv_M_calib = np.linalg.inv(M_calib)
+            M_t = np.dot(M_i, inv_M_calib)
+            new_tvec = np.ones((4, 1))
+            new_tvec[:3, 0]
+            posvec = np.dot(M_t, new_tvec)
+            
+            coord[i, 1:4] = posvec
+            
+            i = i+1
+    else: 
+        coord[:][1:] = old_coord[:][1:]
+    
+    
     old_coord = coord
     
     # show the frame
