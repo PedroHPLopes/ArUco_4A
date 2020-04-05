@@ -134,18 +134,21 @@ while True:
             id_pos = np.where(ids==id)
             coord[i][0] = id
             
-            id_pos = int(id_pos[0])
-            aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
-            
-            R_ct = np.matrix(cv2.Rodrigues(rvec[id_pos])[0])
-            R_tc = R_ct.T
-            pos_camera = -R_tc*np.matrix(tvec[id_pos]).T
+            try:
+                id_pos = int(id_pos[0])
+                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec[id_pos][0], tvec[id_pos][0], 50)
+                
+                R_ct = np.matrix(cv2.Rodrigues(rvec[id_pos])[0])
+                R_tc = R_ct.T
+                pos_camera = -R_tc*np.matrix(tvec[id_pos]).T
 
-            coord[i][1] = pos_camera[0]
-            coord[i][2] = pos_camera[1]
-            coord[i][3] = pos_camera[2]
-            
-            i = i+1
+                coord[i][1] = pos_camera[0]
+                coord[i][2] = pos_camera[1]
+                coord[i][3] = pos_camera[2]
+                
+                i = i+1
+            except:
+                continue
   
     # show the frame
     # frame = cv2.undistort(frame, camera_matrix, camera_distortion)

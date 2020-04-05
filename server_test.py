@@ -3,14 +3,14 @@ import socket, pickle, os, time, subprocess
 
 
 myIP = subprocess.check_output('hostname -I', shell=True).decode('utf-8')
-myIP = myIP.split(" ")[0]
+myIP = myIP.split(" ")[1]
 
 
 print("[INFO] Server IP", myIP)
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #AF_INET=IPV4, SOCK_STREAM=TCP
-s.bind((myIP, 1234))
+s.bind((myIP, 1224))
 s.listen(5) #accepting 5 connections max
 
 clientsocket, address = s.accept()
