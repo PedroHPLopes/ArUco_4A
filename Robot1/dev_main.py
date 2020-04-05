@@ -90,7 +90,7 @@ def rotationMatrixToEulerAngles(R):
     return np.array([x, y, z])
     
 #-- Callback for the interrupt
-def start_interrupt:
+def start_interrupt():
     global START_FLAG
     START_FLAG = 1
 
@@ -123,7 +123,7 @@ camera_distortion = np.array([[-0.30736199, 0.09435416, -0.00032245, -0.00106545
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(INTERRUPT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING, callback=start_interrupt, bouncetime=200)
+GPIO.add_event_detect(INTERRUPT_PIN, GPIO.RISING, callback=start_interrupt, bouncetime=200)
 
 #--- DEFINE dictionary
 aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250)
