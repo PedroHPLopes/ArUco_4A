@@ -97,14 +97,28 @@ def get_coord(tag_id, ret, ids):
     
 
 def calibrate(calib_frames, id_calib):
-    frame = stream.read()
-    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        
-    corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-    ret = aruco.estimatePoseSingleMarkers(corners, calib_size, camera_matrix, camera_distortion)
-    rvec, tvec = get_coord(id_calib, ret, ids)
+    print("[INFO] Started calibration")
+    rvec_list = np.empty((1, 3), dtype=np.float64)
+    tvec_list = np.empty((1, 3), dtype=np.float64)
+    
+    for i in range(calib_frames):
+        frame = stream.read()
+        #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             
-    M_calib = basis_change_mtx(rvec, tvec)
+        corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
+        ret = aruco.estimatePoseSingleMarkers(corners, calib_size, camera_matrix, camera_distortion)
+        rvec, tvec = get_coord(id_calib, ret, ids)
+    
+        if ((type(rvec) and type(tvec)) is np.ndarray):
+            rvec_list = np.append(rvec_list, rvec, axis=0)
+            tvec_list = np.append(tvec_list, tvec, axis=0)
+            
+            
+    rvec_list = rvec_list[1:, :]
+    tvec_list = tvec_list[1:, :]
+    print(rvec_list)
+                    
+    M_calib = basis_change_mtx(np.average(rvec_list, axis=0), np.average(tvec_list, axis=0))
 
     return M_calib 
 
@@ -119,11 +133,11 @@ def basis_change_mtx(rvec, tvec):
 
 def pad_vect(tvec):
     ret = np.ones((4,1))
-    ret[:3, :] = tvec
+    ret[:3, :] = tvec.T
     return ret 
 
 #--- DEFINE parameters
-ids_to_find  = [2, 17]
+ids_to_find  = [2]
 id_calib = 42
 marker_size  = 14 #- [mm]
 calib_size = 20 #- [mm]
@@ -154,7 +168,7 @@ stream = PiVideoStream().start()
 time.sleep(2.0)
 
 #--- CALIBRATION - Find the central tag and set x0 and y0
-M_calib = calibrate(50)
+M_calib = calibrate(50, id_calib)
 inv_M_calib = np.linalg.inv(M_calib)
 
 print("done calib...")
@@ -171,20 +185,25 @@ while True:
     
     #-- Find all the aruco markers in the image
     corners, ids, rejected = aruco.detectMarkers(image=frame, dictionary=aruco_dict, parameters=parameters, cameraMatrix=camera_matrix, distCoeff=camera_distortion)
-
-    if ids in not None:
+    ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
+    
+    if ids is not None:
+        aruco.drawDetectedMarkers(frame, corners)
+        
         i=0
         for id in ids_to_find:
             rvec, tvec = get_coord(id, ret, ids)
 
-            if (rvec and tvec is not False):
-                M_i = basis_change_mtx(rvec, tvec)
-                M_t = np.dot(M_i, inv_M_calib)
+            if ((type(rvec) and type(tvec)) is np.ndarray):
+                aruco.drawAxis(frame, camera_matrix, camera_distortion, rvec, tvec, 50)
+                
+                M_p = np.linalg.inv(M_calib)
                 tvec = pad_vect(tvec)
 
-                coord[i, 1:] = np.dot(M_t, tvec)
+                coord[i, 1:] = np.dot(M_p, tvec).T[:, :3]
+                old_coord[i, 1:] = coord[i, 1:] 
 
-            else: 
+            else:
                 coord[i, 1:] = old_coord[i, 1:]
             
             i += 1
