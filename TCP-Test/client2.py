@@ -3,7 +3,7 @@ import socket, pickle, os, time, subprocess, select
 import errno
 import sys
 
-my_username = "ROBO 1"
+my_username = "ROBO 2"
 HEADER_LENGTH = 10
 
 IP = "127.0.0.1"
@@ -40,7 +40,7 @@ while True:
             mtx_r = client_socket.recv(1024)
             try:
                 mtx_a_r = pickle.loads(mtx_r)
-                print("Robo 2:")
+                print("Robo 1:")
                 print(mtx_a_r)
             except:
                 print("Fail on pickle loads")
